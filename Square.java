@@ -6,7 +6,19 @@ public class Square  {
 
   private int ycor;
 
-  public Square(int number, int x, int y) {
+  private boolean showNumber;
 
+  public Square(int number, int x, int y) {
+	   num = number;
+     xcor = x;
+     ycor = y;
+  }
+
+  public int isFilledIn() {
+    if (showNumber == true) {
+      return num;
+    } else {
+      return -1;
+    }
   }
 }
