@@ -6,9 +6,7 @@ public class Square  {
 
   private int ycor;
 
-  public Square(int number, int x, int y) {
-	   num = number;
-     xcor = x;
-     ycor = y;
-  }
+  private boolean showNumber;
+
+
 }
