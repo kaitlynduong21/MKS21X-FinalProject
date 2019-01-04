@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Square  {
 
   private int num;
@@ -12,14 +14,20 @@ public class Square  {
      num = number;
      xcor = x;
      ycor = y;
-
+     Random randgen = new Random();
+     int rand = randgen.nextInt() % 2;
+     if (rand == 0) {
+       showNumber = false;
+     } else {
+       showNumber = true;
+     }
   }
 
-  public int isFilledIn() {
+  public String isFilledIn() {
     if (showNumber == true) {
-      return num;
+      return "" + num;
     } else {
-      return -1;
+      return "";
     }
   }
 }
