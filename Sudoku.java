@@ -17,8 +17,8 @@ public class Sudoku{
     puzzle = new int[nums.length][nums[0].length];
     Random randgen = new Random();
     for (int x = 0; x < nums.length; x ++ ) {
-      for (int y = 0; y <nums[0].length; y ++) {
-        int rand = randgen.nextInt() % 4;
+      for (int y = 0; y < nums[0].length; y ++) {
+        //int rand = randgen.nextInt() % 4;
         //if (rand == 1) {
           puzzle[x][y] = nums[x][y];
         /*} else {
@@ -29,7 +29,7 @@ public class Sudoku{
     puzzle = myBoard;
   }
 
-  public String toString(){
+  public String getKey(){
     String newstr = "";
     for (int x = 0; x < answer.length; x ++ ) {
       for (int y = 0; y < answer[0].length; y ++) {
@@ -38,6 +38,25 @@ public class Sudoku{
         }
         else{
         newstr+= "|" + answer[x][y];
+        }
+      }
+      if(x % 3 == 2){
+        newstr += "\n";
+      }
+      newstr+= "\n";
+    }
+    return newstr;
+  }
+
+  public String getPuzzle(){
+    String newstr = "";
+    for (int x = 0; x < puzzle.length; x ++ ) {
+      for (int y = 0; y < puzzle[0].length; y ++) {
+        if(y % 3 == 2){
+          newstr += "|" + puzzle[x][y] + "| ";
+        }
+        else{
+        newstr+= "|" + puzzle[x][y];
         }
       }
       if(x % 3 == 2){
