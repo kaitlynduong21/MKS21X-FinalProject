@@ -12,7 +12,7 @@ public class Driver{
       {3, 4, 2, 1, 8, 9, 7, 6, 5},
     };
     Sudoku newBoard = new Sudoku(easy);
-    //System.out.println(newBoard.getPuzzle());
+    System.out.println(newBoard.getPuzzle());
     System.out.println(newBoard.getKey());
   }
 }
