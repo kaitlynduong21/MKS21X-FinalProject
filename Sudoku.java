@@ -1,34 +1,114 @@
-import java.util.*;
-
+import java.util.Random;
 public class Sudoku{
-  private Square[][] puzzle;
+  private char[][] puzzle;
 
-  private Square[][] answer;
+  private char[][] answer;
 
-  private Square[][] myBoard;
+  private char[][] savedBoard;
 
   private String difficulty;
 
   private int seed;
 
-  private Random rand;
+  private Random randgen;
 
-  public Sudoku(Square[][] numbers){
-    puzzle = new Square [numbers.length][numbers[0].length];
+  public Sudoku(int[][] nums){
+    answer = new char[nums.length][nums[0].length];
+    for (int x = 0; x < nums.length; x ++ ) {
+      for (int y = 0; y < nums[0].length; y ++) {
+        answer[x][y] = (char)(nums[x][y] + 48);
+      }
+    }
+    puzzle = new char[nums.length][nums[0].length];
+    Random randSeed = new Random ();
+    seed = Math.abs((randSeed.nextInt() % 10000));
+    randgen = new Random(seed);
+    for (int x = 0; x < nums.length; x ++ ) {
+      for (int y = 0; y < nums[0].length; y ++) {
+        int rand = randgen.nextInt() % 2;
+        if (rand == 1) {
+          puzzle[x][y] = (char)(nums[x][y] + 48);
+        } else {
+          puzzle[x][y] = (char)95;
+        }
+      }
+    }
+    savedBoard = puzzle;
+  }
+
+  public Sudoku(int[][] nums, int seed1){
+    answer = new char[nums.length][nums[0].length];
+    for (int x = 0; x < nums.length; x ++ ) {
+      for (int y = 0; y < nums[0].length; y ++) {
+        answer[x][y] = (char)(nums[x][y] + 48);
+      }
+    }
+    puzzle = new char[nums.length][nums[0].length];
+    randgen = new Random(seed1);
+    seed = seed1;
+    for (int x = 0; x < nums.length; x ++ ) {
+      for (int y = 0; y < nums[0].length; y ++) {
+        int rand = randgen.nextInt() % 2;
+        if (rand == 1) {
+          puzzle[x][y] = (char)(nums[x][y] + 48);
+        } else {
+          puzzle[x][y] = (char)95;
+        }
+      }
+    }
+    savedBoard = puzzle;
   }
 
   public String toString(){
-    String newstr = "";
-    for(int i = 1; i <= puzzle.length; i ++){
-      for(int a = 1; a <= puzzle[0].length + 3; a ++){
-        if(a % 4 == 0){
-          newstr += "|" + puzzle[i][a].isFilledIn() + " ";
+    String newstr = "\nPuzzle: \n";
+    for (int x = 0; x < puzzle.length; x ++ ) {
+      for (int y = 0; y < puzzle[0].length; y ++) {
+        if(y % 3 == 2){
+          newstr += "|" + puzzle[x][y] + "| ";
         }
         else{
-        newstr+= "|" + puzzle[i][a].isFilledIn();
+        newstr+= "|" + puzzle[x][y];
         }
       }
-      if(i % 3 == 0){
+      if(x % 3 == 2){
+        newstr += "\n";
+      }
+      newstr+= "\n";
+    }
+    return newstr += "Seed: " + seed;
+  }
+
+  public String myBoard(){
+    String newstr = "\nLast saved board: \n";
+    for (int x = 0; x < savedBoard.length; x ++ ) {
+      for (int y = 0; y < savedBoard[0].length; y ++) {
+        if(y % 3 == 2){
+          newstr += "|" + savedBoard[x][y] + "| ";
+        }
+        else{
+        newstr+= "|" + savedBoard[x][y];
+        }
+      }
+      if(x % 3 == 2){
+        newstr += "\n";
+      }
+      newstr+= "\n";
+    }
+    return newstr;
+  }
+
+  public String getKey(){
+    String newstr = "\nKey: \n";
+    for (int x = 0; x < answer.length; x ++ ) {
+      for (int y = 0; y < answer[0].length; y ++) {
+        if(y % 3 == 2){
+          newstr += "|" + answer[x][y] + "| ";
+        }
+        else{
+        newstr+= "|" + answer[x][y];
+        }
+      }
+      if(x % 3 == 2){
         newstr += "\n";
       }
       newstr+= "\n";
