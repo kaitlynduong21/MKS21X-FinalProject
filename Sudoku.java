@@ -1,10 +1,10 @@
 import java.util.Random;
 public class Sudoku{
-  private Square[][] puzzle;
+  private String[][] puzzle;
 
-  private Square[][] answer;
+  private String[][] answer;
 
-  private Square[][] myBoard;
+  private String[][] myBoard;
 
   private String difficulty;
 
@@ -12,8 +12,21 @@ public class Sudoku{
 
   private Random rand;
 
-  public Sudoku(Square[][] numbers){
-    myBoard = new Square [numbers.length][numbers[0].length];
+  public Sudoku(String[][] nums){
+    answer = nums;
+    puzzle = new String[nums.length][nums[0].length];
+    Random randgen = new Random();
+    for (int x = 0; x < nums.length; x ++ ) {
+      for (int y = 0; y <nums[0].length; y ++) {
+        int rand = randgen.nextInt() % 4;
+        if (rand == 1) {
+          puzzle[x][y] = answer[x][y];
+        } else {
+          puzzle[x][y] = " ";
+        }
+      }
+    }
+    puzzle = myBoard;
   }
   public String toString(){
     String newstr = "";
