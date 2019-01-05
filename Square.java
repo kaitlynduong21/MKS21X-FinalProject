@@ -27,7 +27,7 @@ public class Square  {
     if (showNumber == true) {
       return "" + num;
     } else {
-      return "";
+      return " ";
     }
   }
 }
