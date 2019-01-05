@@ -11,7 +11,7 @@ public class Driver{
       {8, 5, 9, 7, 6, 4, 1, 3, 2},
       {3, 4, 2, 1, 8, 9, 7, 6, 5},
     };
-    Sudoku newBoard = new Sudoku(easy, 7359);
+    Sudoku newBoard = new Sudoku(easy, Integer.parseInt(args[0]));
     System.out.println(newBoard);
     System.out.println(newBoard.myBoard());
     System.out.println(newBoard.getKey());

@@ -1,4 +1,4 @@
-import java.util.Random;
+import java.util.*;
 public class Sudoku{
   private char[][] puzzle;
 
@@ -56,7 +56,12 @@ public class Sudoku{
         }
       }
     }
-    savedBoard = puzzle;
+    savedBoard = new char[nums.length][nums[0].length];
+    for (int x = 0; x < nums.length; x ++ ) {
+      for (int y = 0; y < nums[0].length; y ++) {
+        savedBoard[x][y] = puzzle[x][y];
+      }
+    }
   }
 
   public String toString(){
@@ -114,6 +119,14 @@ public class Sudoku{
       newstr+= "\n";
     }
     return newstr;
+  }
+
+  public void save() {
+    for (int x = 0; x < puzzle.length; x ++ ) {
+      for (int y = 0; y < puzzle[0].length; y ++) {
+        savedBoard[x][y] = puzzle[x][y];
+      }
+    }
   }
 
 }
