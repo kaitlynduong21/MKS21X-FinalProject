@@ -1,6 +1,7 @@
 public class Driver{
   public static void main(String[]args){
-    Sudoku newBoard = new Sudoku(9,9);
+    Square [][] easyPuzzle = new Square[9][9];
+    Sudoku newBoard = new Sudoku(easyPuzzle);
     System.out.println(newBoard);
   }
 }

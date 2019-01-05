@@ -1,4 +1,5 @@
-import java.util.Random;
+import java.util.*;
+
 public class Sudoku{
   private Square[][] puzzle;
 
@@ -13,17 +14,18 @@ public class Sudoku{
   private Random rand;
 
   public Sudoku(Square[][] numbers){
-    myBoard = new Square [numbers.length][numbers[0].length];
+    puzzle = new Square [numbers.length][numbers[0].length];
   }
+
   public String toString(){
     String newstr = "";
-    for(int i = 1; i <= myBoard.length; i ++){
-      for(int a = 1; a <= myBoard[0].length + 3; a ++){
+    for(int i = 1; i <= puzzle.length; i ++){
+      for(int a = 1; a <= puzzle[0].length + 3; a ++){
         if(a % 4 == 0){
-          newstr += "|" + myBoard[i][a].isFilledIn() + " ";
+          newstr += "|" + puzzle[i][a].isFilledIn() + " ";
         }
         else{
-        newstr+= "|" + myBoard[i][a].isFilledIn();
+        newstr+= "|" + puzzle[i][a].isFilledIn();
         }
       }
       if(i % 3 == 0){
