@@ -15,11 +15,11 @@ public class Square  {
      xcor = x;
      ycor = y;
      Random randgen = new Random();
-     int rand = randgen.nextInt() % 2;
-     if (rand == 0) {
-       showNumber = false;
-     } else {
+     int rand = randgen.nextInt() % 4;
+     if (rand == 1) {
        showNumber = true;
+     } else {
+       showNumber = false;
      }
   }
 
