@@ -146,6 +146,10 @@ public class TerminalDemo {
 					//x++;
 				}
 
+				if (key.getKind() == Key.Kind.Backspace) {
+					terminal.moveCursor(x,y);
+					terminal.putCharacter(' ');
+				}
 
 				putString(1,4,terminal,"["+key.getCharacter() +"]");
 				putString(1,1,terminal,key+"        ");//to clear leftover letters pad withspaces
