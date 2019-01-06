@@ -14,6 +14,8 @@ import com.googlecode.lanterna.input.InputDecoder;
 import com.googlecode.lanterna.input.InputProvider;
 import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.input.KeyMappingProfile;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 
 public class TerminalDemo {
@@ -27,7 +29,7 @@ public class TerminalDemo {
 	public static void main(String[] args) {
 
 
-		int x = 10;
+		int x = 1;
 		int y = 10;
 
 		Terminal terminal = TerminalFacade.createTextTerminal();
@@ -62,8 +64,9 @@ public class TerminalDemo {
 			terminal.applyBackgroundColor(Terminal.Color.WHITE);
 			terminal.applyForegroundColor(Terminal.Color.BLACK);
 			//applySGR(a,b) for multiple modifiers (bold,blink) etc.
+			terminal.applySGR(Terminal.SGR.ENTER_BLINK);
 			terminal.applySGR(Terminal.SGR.ENTER_UNDERLINE);
-			terminal.putCharacter('\u00a4');
+			//terminal.putCharacter('\u00a4');
 			//terminal.putCharacter(' ');
 			terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
 			terminal.applyForegroundColor(Terminal.Color.DEFAULT);
@@ -99,34 +102,51 @@ public class TerminalDemo {
 
 				if (key.getKind() == Key.Kind.ArrowLeft) {
 					terminal.moveCursor(x,y);
-					terminal.putCharacter(' ');
-					x--;
+					//terminal.putCharacter(key.getKeyChar());
+					x-= 2;
 				}
 
 				if (key.getKind() == Key.Kind.ArrowRight) {
 					terminal.moveCursor(x,y);
-					terminal.putCharacter(' ');
-					x++;
+					//terminal.putCharacter(' ');
+					x+= 2;
 				}
 
 				if (key.getKind() == Key.Kind.ArrowUp) {
 					terminal.moveCursor(x,y);
-					terminal.putCharacter(' ');
+					//terminal.putCharacter(' ');
 					y--;
 				}
 
 				if (key.getKind() == Key.Kind.ArrowDown) {
 					terminal.moveCursor(x,y);
-					terminal.putCharacter(' ');
+					//terminal.putCharacter(' ');
 					y++;
 				}
 				//space moves it diagonally
 				if (key.getCharacter() == ' ') {
 					terminal.moveCursor(x,y);
-					terminal.putCharacter(' ');
+					//terminal.putCharacter(' ');
 					y++;
-					x++;
+					x+= 2;
 				}
+
+				if (key.getCharacter() == '1' ||
+						key.getCharacter() == '2' ||
+						key.getCharacter() == '3' ||
+						key.getCharacter() == '4' ||
+						key.getCharacter() == '5' ||
+						key.getCharacter() == '6' ||
+						key.getCharacter() == '7' ||
+						key.getCharacter() == '8' ||
+						key.getCharacter() == '9' ) {
+					terminal.moveCursor(x,y);
+					terminal.putCharacter(key.getCharacter());
+					//y++;
+					//x++;
+				}
+
+
 				putString(1,4,terminal,"["+key.getCharacter() +"]");
 				putString(1,1,terminal,key+"        ");//to clear leftover letters pad withspaces
 			}
