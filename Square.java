@@ -30,4 +30,13 @@ public class Square  {
       return " ";
     }
   }
+
+  public int getX(){
+    return xcor;
+  }
+
+  public int getY(){
+    return ycor;
+  }
+
 }
