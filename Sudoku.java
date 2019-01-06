@@ -139,7 +139,26 @@ public class Sudoku{
     Terminal terminal = TerminalFacade.createTextTerminal();
     terminal.moveCursor(x,y);
     Key key = terminal.readInput();
-    
+
+    if (key.getKind() == Key.Kind.ArrowLeft) {
+      x--;
+      terminal.moveCursor(x,y);
+    }
+
+    if (key.getKind() == Key.Kind.ArrowRight) {
+      x++;
+      terminal.moveCursor(x,y);
+    }
+
+    if (key.getKind() == Key.Kind.ArrowUp) {
+      y--;
+      terminal.moveCursor(x,y);
+    }
+
+    if (key.getKind() == Key.Kind.ArrowDown) {
+      y++;
+      terminal.moveCursor(x,y);
+    }
   }
 
 
