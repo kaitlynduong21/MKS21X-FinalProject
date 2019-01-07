@@ -30,7 +30,7 @@ public class TerminalDemo {
 
 
 		int x = 1;
-		int y = 10;
+		int y = 7;
 
 		Terminal terminal = TerminalFacade.createTextTerminal();
 		terminal.enterPrivateMode();
@@ -55,7 +55,7 @@ public class TerminalDemo {
 			{3, 4, 2, 1, 8, 9, 7, 6, 5},
 		};
 		Sudoku newBoard = new Sudoku(easy);
-		System.out.println(newBoard);
+		putString(1, 5, terminal, newBoard.toString());
 
 		while(running){
 
