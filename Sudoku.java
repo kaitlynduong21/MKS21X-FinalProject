@@ -122,6 +122,10 @@ public class Sudoku{
     return newstr;
   }
 
+  public int getSeed(){
+    return seed;
+  }
+
   public void save() {
     for (int x = 0; x < puzzle.length; x ++ ) {
       for (int y = 0; y < puzzle[0].length; y ++) {

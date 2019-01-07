@@ -14,11 +14,9 @@ import com.googlecode.lanterna.input.InputDecoder;
 import com.googlecode.lanterna.input.InputProvider;
 import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.input.KeyMappingProfile;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 
-public class TerminalDemo {
+public class Terminal{
 
 	public static void putString(int r, int c,Terminal t, String s){
 		t.moveCursor(r,c);
@@ -26,6 +24,7 @@ public class TerminalDemo {
 			t.putCharacter(s.charAt(i));
 		}
 	}
+	
 	public static void main(String[] args) {
 
 
@@ -150,6 +149,12 @@ public class TerminalDemo {
 					terminal.moveCursor(x,y);
 					terminal.putCharacter(' ');
 				}
+
+				/*if (key.getCharacter() == 'c'){
+					terminal.clearScreen();
+					Sudoku clearedBoard =  new Sudoku (easy, newBoard.getSeed());
+				}*/
+
 
 				putString(1,4,terminal,"["+key.getCharacter() +"]");
 				putString(1,1,terminal,key+"        ");//to clear leftover letters pad withspaces
