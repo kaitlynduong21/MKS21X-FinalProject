@@ -1,8 +1,4 @@
-import com.googlecode.lanterna.terminal.Terminal;
-import com.googlecode.lanterna.input.Key;
-import com.googlecode.lanterna.input.Key.Kind;
-import com.googlecode.lanterna.TerminalFacade;
-
+import java.io.*;
 import java.util.*;
 public class Sudoku{
   public char[][] puzzle;
@@ -132,34 +128,25 @@ public class Sudoku{
         savedBoard[x][y] = puzzle[x][y];
       }
     }
+    try{
+    File file = new File("savedBoard.txt");
+    if(!file.exists()){
+      file.createNewFile();
+    }
+
+    FileWriter writer = new FileWriter(file);
+    BufferedWriter board = new BufferedWriter(writer);
+    for(int x = 0; x < savedBoard.length; x++){
+      for(int y = 0; y < savedBoard[0].length; y++){
+        board.write(savedBoard[x][y]);
+      }
+      board.write("\n");
+    }
+    board.close();
+    System.out.println("Saved Successful!");
+  } catch (IOException exception){
+    exception.printStackTrace();
   }
-  public static void main(Square[] args){
-    int x = args[0].getX();
-    int y = args[0].getY();
-    Terminal terminal = TerminalFacade.createTextTerminal();
-    terminal.moveCursor(x,y);
-    Key key = terminal.readInput();
-
-    if (key.getKind() == Key.Kind.ArrowLeft) {
-      x--;
-      terminal.moveCursor(x,y);
-    }
-
-    if (key.getKind() == Key.Kind.ArrowRight) {
-      x++;
-      terminal.moveCursor(x,y);
-    }
-
-    if (key.getKind() == Key.Kind.ArrowUp) {
-      y--;
-      terminal.moveCursor(x,y);
-    }
-
-    if (key.getKind() == Key.Kind.ArrowDown) {
-      y++;
-      terminal.moveCursor(x,y);
-    }
   }
-
 
 }
