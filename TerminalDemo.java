@@ -152,10 +152,35 @@ public class TerminalDemo{
 				}
 
 				if (key.getCharacter() == 'c') {
+					putString(0, 20, terminal, "Are you sure you want to clear the board?");
 					terminal.clearScreen();
 					Sudoku cleared = new Sudoku (easy, newBoard.getSeed());
+					//newBoard = cleared
 					putString(1, 5, terminal, cleared.toString());
+					putString(0, 20, terminal, "Board refreshed");
 				}
+
+				if (String(0,20).equals("Are you sure you want to clear the board?")) {
+					if (key.getCharacter() == 'y') {
+					terminal.clearScreen();
+					Sudoku cleared = new Sudoku (easy, newBoard.getSeed());
+					//newBoard = cleared
+					putString(1, 5, terminal, cleared.toString());
+					putString(0, 20, terminal, "Board refreshed");
+				} else {
+					if (key.getCharacter() == 'n') {
+						putString(0, 20, terminal, "Board not refreshed");
+					}
+				}
+
+				if (key.getCharacter() == 's') {
+					newBoard.save();
+					putString(0, 20, terminal, "Saved Successful!");
+				}
+			}
+
+
+
 
 				putString(1,4,terminal,"["+key.getCharacter() +"]");
 				putString(1,1,terminal,key+"        ");//to clear leftover letters pad withspaces

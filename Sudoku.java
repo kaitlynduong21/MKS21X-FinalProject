@@ -147,7 +147,7 @@ public class Sudoku{
       board.write("\n");
     }
     board.close();
-    System.out.println("Saved Successful!");
+    //System.out.println("Saved Successful!");
   } catch (IOException exception){
     exception.printStackTrace();
   }
