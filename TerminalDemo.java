@@ -55,39 +55,32 @@ public class TerminalDemo{
 			{3, 4, 2, 1, 8, 9, 7, 6, 5},
 		};
 		Sudoku newBoard = new Sudoku(easy);
+		terminal.applySGR(Terminal.SGR.ENTER_BOLD);
 		putString(1, 5, terminal, newBoard.toString());
 
 		while(running){
+
 
 
 			terminal.moveCursor(x,y);
 			terminal.applyBackgroundColor(Terminal.Color.WHITE);
 			terminal.applyForegroundColor(Terminal.Color.BLACK);
 			//applySGR(a,b) for multiple modifiers (bold,blink) etc.
-			terminal.applySGR(Terminal.SGR.ENTER_BLINK);
-			terminal.applySGR(Terminal.SGR.ENTER_UNDERLINE);
+			// /terminal.applySGR(Terminal.SGR.ENTER_BLINK);
+			//terminal.applySGR(Terminal.SGR.ENTER_UNDERLINE);
 			//terminal.putCharacter('\u00a4');
 			//terminal.putCharacter(' ');
 			terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
 			terminal.applyForegroundColor(Terminal.Color.DEFAULT);
 			terminal.applySGR(Terminal.SGR.RESET_ALL);
 
+			String str = "Current position is ";
+			str += x;
+			str += ", ";
+			str += (y - 7);
+			str += ". ";
+			putString(0 , 20, terminal, str);
 
-			terminal.moveCursor(size.getColumns()-5,5);
-			terminal.applyBackgroundColor(Terminal.Color.RED);
-			terminal.applyForegroundColor(Terminal.Color.YELLOW);
-			terminal.applySGR(Terminal.SGR.ENTER_BOLD);
-			terminal.putCharacter(' ');
-			terminal.putCharacter(' ');
-			terminal.putCharacter('\u262d');
-			terminal.putCharacter(' ');
-			terminal.moveCursor(size.getColumns()-5,6);
-			terminal.putCharacter(' ');
-			terminal.putCharacter(' ');
-			terminal.putCharacter(' ');
-			terminal.putCharacter(' ');
-			terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
-			terminal.applyForegroundColor(Terminal.Color.DEFAULT);
 
 			Key key = terminal.readInput();
 
@@ -141,7 +134,9 @@ public class TerminalDemo{
 						key.getCharacter() == '8' ||
 						key.getCharacter() == '9' ) {
 					terminal.moveCursor(x,y);
+					//terminal.applySGR(Terminal.SGR.ENTER_BLINK);
 					terminal.putCharacter(key.getCharacter());
+					newBoard.setPuzzle(x, y, key.getCharacter());
 					//y++;
 					//x++;
 				}
@@ -152,15 +147,17 @@ public class TerminalDemo{
 				}
 
 				if (key.getCharacter() == 'c') {
-					putString(0, 20, terminal, "Are you sure you want to clear the board?");
+					//putString(0, 20, terminal, "Are you sure you want to clear the board?");
 					terminal.clearScreen();
 					Sudoku cleared = new Sudoku (easy, newBoard.getSeed());
 					//newBoard = cleared
+					terminal.applySGR(Terminal.SGR.ENTER_BOLD);
 					putString(1, 5, terminal, cleared.toString());
+					terminal.applySGR(Terminal.SGR.EXIT_BOLD);
 					putString(0, 20, terminal, "Board refreshed");
 				}
 
-				if (String(0,20).equals("Are you sure you want to clear the board?")) {
+				/*if (String(0,20).equals("Are you sure you want to clear the board?")) {
 					if (key.getCharacter() == 'y') {
 					terminal.clearScreen();
 					Sudoku cleared = new Sudoku (easy, newBoard.getSeed());
@@ -171,14 +168,12 @@ public class TerminalDemo{
 					if (key.getCharacter() == 'n') {
 						putString(0, 20, terminal, "Board not refreshed");
 					}
-				}
+				}*/
 
 				if (key.getCharacter() == 's') {
 					newBoard.save();
 					putString(0, 20, terminal, "Saved Successful!");
 				}
-			}
-
 
 
 

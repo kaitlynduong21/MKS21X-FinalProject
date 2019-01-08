@@ -126,6 +126,10 @@ public class Sudoku{
     return seed;
   }
 
+  public void setPuzzle(int x, int y, char num) {
+    puzzle[x][y] = num;
+  }
+
   public void save() {
     for (int x = 0; x < puzzle.length; x ++ ) {
       for (int y = 0; y < puzzle[0].length; y ++) {
