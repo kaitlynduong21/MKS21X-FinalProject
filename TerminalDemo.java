@@ -55,39 +55,40 @@ public class TerminalDemo{
 			{3, 4, 2, 1, 8, 9, 7, 6, 5},
 		};
 		Sudoku newBoard = new Sudoku(easy);
+		terminal.applySGR(Terminal.SGR.ENTER_BOLD);
 		putString(1, 5, terminal, newBoard.toString());
 
 		while(running){
+
 
 
 			terminal.moveCursor(x,y);
 			terminal.applyBackgroundColor(Terminal.Color.WHITE);
 			terminal.applyForegroundColor(Terminal.Color.BLACK);
 			//applySGR(a,b) for multiple modifiers (bold,blink) etc.
-			terminal.applySGR(Terminal.SGR.ENTER_BLINK);
-			terminal.applySGR(Terminal.SGR.ENTER_UNDERLINE);
+			// /terminal.applySGR(Terminal.SGR.ENTER_BLINK);
+			//terminal.applySGR(Terminal.SGR.ENTER_UNDERLINE);
 			//terminal.putCharacter('\u00a4');
 			//terminal.putCharacter(' ');
 			terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
 			terminal.applyForegroundColor(Terminal.Color.DEFAULT);
 			terminal.applySGR(Terminal.SGR.RESET_ALL);
 
+			int xcor = 1/2 * x - 1/2;
+			int ycor = y - 7;
 
-			terminal.moveCursor(size.getColumns()-5,5);
-			terminal.applyBackgroundColor(Terminal.Color.RED);
-			terminal.applyForegroundColor(Terminal.Color.YELLOW);
-			terminal.applySGR(Terminal.SGR.ENTER_BOLD);
-			terminal.putCharacter(' ');
-			terminal.putCharacter(' ');
-			terminal.putCharacter('\u262d');
-			terminal.putCharacter(' ');
-			terminal.moveCursor(size.getColumns()-5,6);
-			terminal.putCharacter(' ');
-			terminal.putCharacter(' ');
-			terminal.putCharacter(' ');
-			terminal.putCharacter(' ');
-			terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
-			terminal.applyForegroundColor(Terminal.Color.DEFAULT);
+			String str = "";
+			if (y == 10 || y == 14 || y >= 19 || y < 7 || x == 7 || x == 15 || x >= 23 || x < 0) {
+				str += "This is not a position on the board. Move your cursor.";
+				putString(0 , 20, terminal, str);
+			} else {
+				str += "Current position is ";
+				str += xcor;
+				str += ", ";
+				str += ycor;
+				str += ".                             ";
+				putString(0 , 20, terminal, str);
+			}
 
 			Key key = terminal.readInput();
 
@@ -142,25 +143,32 @@ public class TerminalDemo{
 						key.getCharacter() == '9' ) {
 					terminal.moveCursor(x,y);
 					terminal.putCharacter(key.getCharacter());
+					//terminal.applySGR(Terminal.SGR.ENTER_BLINK);
+					newBoard.setPuzzle(xcor, ycor, key.getCharacter());
 					//y++;
 					//x++;
 				}
 
 				if (key.getKind() == Key.Kind.Backspace) {
-					terminal.moveCursor(x,y);
+					terminal.moveCursor(x, y);
 					terminal.putCharacter(' ');
 				}
 
 				if (key.getCharacter() == 'c') {
-					putString(0, 20, terminal, "Are you sure you want to clear the board?");
-					terminal.clearScreen();
-					Sudoku cleared = new Sudoku (easy, newBoard.getSeed());
-					//newBoard = cleared
-					putString(1, 5, terminal, cleared.toString());
-					putString(0, 20, terminal, "Board refreshed");
+					putString(0, 21, terminal, "Are you sure you want to clear the board? Select option + c if yes.           ");
 				}
 
-				if (String(0,20).equals("Are you sure you want to clear the board?")) {
+				if (key.getCharacter() == 'ç') {
+					terminal.clearScreen();
+					Sudoku cleared = new Sudoku (easy, newBoard.getSeed());
+					newBoard = cleared;
+					terminal.applySGR(Terminal.SGR.ENTER_BOLD);
+					putString(1, 5, terminal, cleared.toString());
+					terminal.applySGR(Terminal.SGR.EXIT_BOLD);
+					putString(0, 21, terminal, "Board refreshed                                                                 ");
+				}
+
+				/*if (String(0,20).equals("Are you sure you want to clear the board?")) {
 					if (key.getCharacter() == 'y') {
 					terminal.clearScreen();
 					Sudoku cleared = new Sudoku (easy, newBoard.getSeed());
@@ -171,14 +179,21 @@ public class TerminalDemo{
 					if (key.getCharacter() == 'n') {
 						putString(0, 20, terminal, "Board not refreshed");
 					}
-				}
+				}*/
 
 				if (key.getCharacter() == 's') {
 					newBoard.save();
-					putString(0, 20, terminal, "Saved Successful!");
+					putString(0, 21, terminal, "Saved Successful!                                                               ");
 				}
-			}
 
+				if (key.getCharacter() == 'r') {
+					putString(0, 21, terminal, "Do you want to retrieve your last saved board? Select option + r if yes.");
+				}
+
+				if (key.getCharacter() == '®') {
+					terminal.clearScreen();
+					putString(1, 5, terminal, newBoard.myBoard());
+				}
 
 
 
