@@ -74,7 +74,8 @@ public class TerminalDemo{
 			terminal.applyForegroundColor(Terminal.Color.DEFAULT);
 			terminal.applySGR(Terminal.SGR.RESET_ALL);
 
-			int xcor = 1/2 * x - 1/2;
+			double k = 0.5 * x - 0.5;
+			int xcor = (int)k;
 			int ycor = y - 7;
 
 			String str = "";
