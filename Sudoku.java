@@ -156,10 +156,11 @@ public class Sudoku{
     exception.printStackTrace();
   }
   }
+
   public char hint(){
     Random randNum = new Random();
-    int xnum = randNum.nextInt() % 10;
-    int ynum = randNum.nextInt() % 10;
+    int xnum = Math.abs(randNum.nextInt() % 10);
+    int ynum = Math.abs(randNum.nextInt() % 10);
     puzzle[xnum][ynum] = answer[xnum][ynum];
     return puzzle[xnum][ynum];
   }
