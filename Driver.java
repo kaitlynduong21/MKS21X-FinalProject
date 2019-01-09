@@ -16,5 +16,6 @@ public class Driver{
     System.out.println(newBoard.myBoard());
     System.out.println(newBoard.getKey());
     newBoard.save();
+    System.out.println(newBoard.hint());
   }
 }
