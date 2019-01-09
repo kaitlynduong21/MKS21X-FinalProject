@@ -126,7 +126,7 @@ public class Sudoku{
     return seed;
   }
 
-  public void setPuzzle(int x, int y, char num) {
+  public void setPuzzle(int y, int x, char num) {
     puzzle[x][y] = num;
   }
 
@@ -146,6 +146,18 @@ public class Sudoku{
     BufferedWriter board = new BufferedWriter(writer);
     for(int x = 0; x < savedBoard.length; x++){
       for(int y = 0; y < savedBoard[0].length; y++){
+        /*if (x > 3) {
+          x--;
+        }
+        if (x > 7) {
+          x--;
+        }
+        if (y > 3) {
+          y--;
+        }
+        if (y > 7) {
+          y--;
+        }*/
         board.write(savedBoard[x][y]);
       }
       board.write("\n");

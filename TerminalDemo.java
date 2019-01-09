@@ -74,7 +74,8 @@ public class TerminalDemo{
 			terminal.applyForegroundColor(Terminal.Color.DEFAULT);
 			terminal.applySGR(Terminal.SGR.RESET_ALL);
 
-			int xcor = 1/2 * x - 1/2;
+			double k = 0.5 * x - 0.5;
+			int xcor = (int)k;
 			int ycor = y - 7;
 
 			String str = "";
@@ -103,31 +104,26 @@ public class TerminalDemo{
 
 				if (key.getKind() == Key.Kind.ArrowLeft) {
 					terminal.moveCursor(x,y);
-					//terminal.putCharacter(key.getKeyChar());
 					x-= 2;
 				}
 
 				if (key.getKind() == Key.Kind.ArrowRight) {
 					terminal.moveCursor(x,y);
-					//terminal.putCharacter(' ');
 					x+= 2;
 				}
 
 				if (key.getKind() == Key.Kind.ArrowUp) {
 					terminal.moveCursor(x,y);
-					//terminal.putCharacter(' ');
 					y--;
 				}
 
 				if (key.getKind() == Key.Kind.ArrowDown) {
 					terminal.moveCursor(x,y);
-					//terminal.putCharacter(' ');
 					y++;
 				}
 				//space moves it diagonally
 				if (key.getCharacter() == ' ') {
 					terminal.moveCursor(x,y);
-					//terminal.putCharacter(' ');
 					y++;
 					x+= 2;
 				}
@@ -145,13 +141,12 @@ public class TerminalDemo{
 					terminal.putCharacter(key.getCharacter());
 					//terminal.applySGR(Terminal.SGR.ENTER_BLINK);
 					newBoard.setPuzzle(xcor, ycor, key.getCharacter());
-					//y++;
-					//x++;
 				}
 
 				if (key.getKind() == Key.Kind.Backspace) {
 					terminal.moveCursor(x, y);
 					terminal.putCharacter(' ');
+					newBoard.setPuzzle(xcor, ycor, '_');
 				}
 
 				if (key.getCharacter() == 'c') {
