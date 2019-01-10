@@ -190,6 +190,11 @@ public class TerminalDemo{
 					putString(1, 5, terminal, newBoard.myBoard());
 				}
 
+				if (key.getCharacter() == 'h') {
+					newBoard.hint();
+				}
+
+
 
 
 				putString(1,4,terminal,"["+key.getCharacter() +"]");
