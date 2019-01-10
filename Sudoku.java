@@ -133,7 +133,20 @@ public class Sudoku{
   public void save() {
     for (int x = 0; x < puzzle.length; x ++ ) {
       for (int y = 0; y < puzzle[0].length; y ++) {
-        savedBoard[x][y] = puzzle[x][y];
+        int a = x;
+        int b = y;
+        if(x != 3 && x != 7 && y != 3 && y != 7){
+          savedBoard[a][b] = puzzle[x][y];
+        }
+        else{
+          if(x == 3 || x == 7){
+            a++;
+          }
+          else{
+            b++;
+          }
+          savedBoard[a][b] = puzzle[x][y];
+        }
       }
     }
     try{
@@ -146,18 +159,6 @@ public class Sudoku{
     BufferedWriter board = new BufferedWriter(writer);
     for(int x = 0; x < savedBoard.length; x++){
       for(int y = 0; y < savedBoard[0].length; y++){
-        /*if (x > 3) {
-          x--;
-        }
-        if (x > 7) {
-          x--;
-        }
-        if (y > 3) {
-          y--;
-        }
-        if (y > 7) {
-          y--;
-        }*/
         board.write(savedBoard[x][y]);
       }
       board.write("\n");
