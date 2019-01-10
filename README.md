@@ -13,3 +13,7 @@ Development Log
 1/07: We are working on the save method in the main function. Currently if you select the character 's', the original puzzle will be saved in a text file, however we are trying to figure out how we can save the changes made to the puzzle. We have been able to clear the board by selecting the character 'c', but we want to add a step after you select c asking if you are sure you want to restart because we don't want someone accidently selecting c having all their progress deleted.
 
 1/08: Kaitlyn worked on adding a clear, save, and retrieve saved board feature in the TerminalDemo file. The save method does not work completely yet because it is not saving to the correct locations so when you retrieve the saved board, the board is not what was saved. Sabrina is starting to work on the hint method.
+
+1/09: We both realized the save method isn't working properly and we had a collaborative effort on trying to fix how the code reads the Sudoku board and prints it out in the terminal. 
+
+1/10: 
