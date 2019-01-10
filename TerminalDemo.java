@@ -75,11 +75,24 @@ public class TerminalDemo{
 			terminal.applySGR(Terminal.SGR.RESET_ALL);
 
 			double k = 0.5 * x - 0.5;
+			if (k > 3) {
+				k--;
+			}
+			if (k >= 6) {
+				k--;
+			}
 			int xcor = (int)k;
 			int ycor = y - 7;
+			if (ycor > 3) {
+				ycor--;
+			}
+			if (ycor >= 6) {
+				ycor--;
+			}
+
 
 			String str = "";
-			if (y == 10 || y == 14 || y >= 19 || y < 7 || x == 7 || x == 15 || x >= 23 || x < 0) {
+			if (y == 10 || y == 14 || y >= 18 || y < 7 || x == 7 || x == 15 || x >= 23 || x < 0) {
 				str += "This is not a position on the board. Move your cursor.";
 				putString(0 , 20, terminal, str);
 			} else {
@@ -186,13 +199,17 @@ public class TerminalDemo{
 				}
 
 				if (key.getCharacter() == '®') {
-					terminal.clearScreen();
+					//terminal.clearScreen();
 					putString(1, 5, terminal, newBoard.myBoard());
 				}
 
 				if (key.getCharacter() == 'h') {
 					newBoard.hint();
 				}
+
+				/*if (key.getCharacter() == 'd') {
+					putString(20, 5, newBoard.myBoard)
+				}*/
 
 
 

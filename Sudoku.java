@@ -133,22 +133,9 @@ public class Sudoku{
   public void save() {
     for (int x = 0; x < puzzle.length; x ++ ) {
       for (int y = 0; y < puzzle[0].length; y ++) {
-        int a = x;
-        int b = y;
-        if(x != 3 && x != 7 && y != 3 && y != 7){
-          savedBoard[a][b] = puzzle[x][y];
-        }
-        else{
-          if(x == 3 || x == 7){
-            a++;
-          }
-          else{
-            b++;
-          }
-          savedBoard[a][b] = puzzle[x][y];
+          savedBoard[x][y] = puzzle[x][y];
         }
       }
-    }
     try{
     File file = new File("savedBoard.txt");
     if(!file.exists()){
