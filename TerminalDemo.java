@@ -200,7 +200,7 @@ public class TerminalDemo{
 
 				if (key.getCharacter() == '®') {
 					//terminal.clearScreen();
-					putString(1, 5, terminal, newBoard.myBoard());
+					putString(1, 24, terminal, newBoard.myBoard());
 				}
 
 				if (key.getCharacter() == 'h') {
