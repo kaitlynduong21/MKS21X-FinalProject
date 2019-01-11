@@ -17,7 +17,7 @@ public class Sudoku{
     answer = new char[nums.length][nums[0].length];
     for (int x = 0; x < nums.length; x ++ ) {
       for (int y = 0; y < nums[0].length; y ++) {
-        answer[x][y] = (char)(nums[x][y] + 48);
+        answer[x][y] = (char)(nums[x][y] + 48); //copying over char values to answer
       }
     }
     puzzle = new char[nums.length][nums[0].length];
@@ -26,11 +26,11 @@ public class Sudoku{
     randgen = new Random(seed);
     for (int x = 0; x < nums.length; x ++ ) {
       for (int y = 0; y < nums[0].length; y ++) {
-        int rand = randgen.nextInt() % 2;
+        int rand = randgen.nextInt() % 2; //finding random positions to place the numbers on the board
         if (rand == 1) {
-          puzzle[x][y] = (char)(nums[x][y] + 48);
+          puzzle[x][y] = (char)(nums[x][y] + 48); //displaying char values on board at some positions
         } else {
-          puzzle[x][y] = (char)95;
+          puzzle[x][y] = (char)95; //displaying '_' at unfilled positions
         }
       }
     }
@@ -65,12 +65,12 @@ public class Sudoku{
     }
   }
 
-  public String toString(){
+  public String toString(){ //prints the board currently working on
     String newstr = "\nPuzzle: \n";
     for (int x = 0; x < puzzle.length; x ++ ) {
       for (int y = 0; y < puzzle[0].length; y ++) {
         if(y % 3 == 2){
-          newstr += "|" + puzzle[x][y] + "| ";
+          newstr += "|" + puzzle[x][y] + "| "; //positioning the numbers in a sudoku board to make 9 3x3 boards
         }
         else{
         newstr+= "|" + puzzle[x][y];
@@ -84,7 +84,7 @@ public class Sudoku{
     return newstr += "Seed: " + seed;
   }
 
-  public String myBoard(){
+  public String myBoard(){ //displays the last saved board
     String newstr = "\nLast saved board: \n";
     for (int x = 0; x < savedBoard.length; x ++ ) {
       for (int y = 0; y < savedBoard[0].length; y ++) {
@@ -103,7 +103,7 @@ public class Sudoku{
     return newstr;
   }
 
-  public String getKey(){
+  public String getKey(){ //displays the answer key
     String newstr = "\nKey: \n";
     for (int x = 0; x < answer.length; x ++ ) {
       for (int y = 0; y < answer[0].length; y ++) {
@@ -126,27 +126,27 @@ public class Sudoku{
     return seed;
   }
 
-  public void setPuzzle(int y, int x, char num) {
+  public void setPuzzle(int y, int x, char num) { //changing the values in the sudoku board at a specific position
     puzzle[x][y] = num;
   }
 
   public void save() {
     for (int x = 0; x < puzzle.length; x ++ ) {
       for (int y = 0; y < puzzle[0].length; y ++) {
-          savedBoard[x][y] = puzzle[x][y];
+          savedBoard[x][y] = puzzle[x][y]; //copies over values from the puzzle to the savedBoard array
         }
       }
     try{
     File file = new File("savedBoard.txt");
     if(!file.exists()){
-      file.createNewFile();
+      file.createNewFile(); //creates the text file savedBoard if not existent already
     }
 
     FileWriter writer = new FileWriter(file);
     BufferedWriter board = new BufferedWriter(writer);
     for(int x = 0; x < savedBoard.length; x++){
       for(int y = 0; y < savedBoard[0].length; y++){
-        board.write(savedBoard[x][y]);
+        board.write(savedBoard[x][y]); //enters values of the savedBoard into the text file
       }
       board.write("\n");
     }
@@ -159,9 +159,15 @@ public class Sudoku{
 
   public char hint(){
     Random randNum = new Random();
-    int xnum = Math.abs(randNum.nextInt() % 10);
-    int ynum = Math.abs(randNum.nextInt() % 10);
-    puzzle[xnum][ynum] = answer[xnum][ynum];
+    int xnum = Math.abs(randNum.nextInt() % 9); // random x and y positions
+    int ynum = Math.abs(randNum.nextInt() % 9);
+    int tries = 1000;
+    while (puzzle[xnum][ynum] != (char)95 && tries > 0){ //if the position is occupied by a number, try again to find an empty position
+      xnum = Math.abs(randNum.nextInt() % 10);
+      ynum = Math.abs(randNum.nextInt() % 10);
+      tries--;
+    }
+    puzzle[xnum][ynum] = answer[xnum][ynum]; //add the random value from the key to the puzzle
     return puzzle[xnum][ynum];
   }
 

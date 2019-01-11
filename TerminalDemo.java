@@ -55,8 +55,8 @@ public class TerminalDemo{
 			{3, 4, 2, 1, 8, 9, 7, 6, 5},
 		};
 		Sudoku newBoard = new Sudoku(easy);
-		terminal.applySGR(Terminal.SGR.ENTER_BOLD);
-		putString(1, 5, terminal, newBoard.toString());
+		terminal.applySGR(Terminal.SGR.ENTER_BOLD); //have the board printed to be bolded
+		putString(1, 5, terminal, newBoard.toString()); //printing the board into the terminal
 
 		while(running){
 
@@ -74,7 +74,7 @@ public class TerminalDemo{
 			terminal.applyForegroundColor(Terminal.Color.DEFAULT);
 			terminal.applySGR(Terminal.SGR.RESET_ALL);
 
-			double k = 0.5 * x - 0.5;
+			double k = 0.5 * x - 0.5; //setting x and y coordinates
 			if (k > 3) {
 				k--;
 			}
@@ -93,10 +93,10 @@ public class TerminalDemo{
 
 			String str = "";
 			if (y == 10 || y == 14 || y >= 18 || y < 7 || x == 7 || x == 15 || x >= 23 || x < 0) {
-				str += "This is not a position on the board. Move your cursor.";
+				str += "This is not a position on the board. Move your cursor."; //if cursor is in the space between the board and not in a square on the board
 				putString(0 , 20, terminal, str);
 			} else {
-				str += "Current position is ";
+				str += "Current position is "; //tells the user where the cursor is located
 				str += xcor;
 				str += ", ";
 				str += ycor;
@@ -109,39 +109,39 @@ public class TerminalDemo{
 			if (key != null)
 			{
 
-				if (key.getKind() == Key.Kind.Escape) {
+				if (key.getKind() == Key.Kind.Escape) { //exiting the board
 
 					terminal.exitPrivateMode();
 					running = false;
 				}
 
-				if (key.getKind() == Key.Kind.ArrowLeft) {
+				if (key.getKind() == Key.Kind.ArrowLeft) { //cursor moving to the left
 					terminal.moveCursor(x,y);
 					x-= 2;
 				}
 
-				if (key.getKind() == Key.Kind.ArrowRight) {
+				if (key.getKind() == Key.Kind.ArrowRight) { //cursor moving to the right
 					terminal.moveCursor(x,y);
 					x+= 2;
 				}
 
-				if (key.getKind() == Key.Kind.ArrowUp) {
+				if (key.getKind() == Key.Kind.ArrowUp) { //cursor moving up
 					terminal.moveCursor(x,y);
 					y--;
 				}
 
-				if (key.getKind() == Key.Kind.ArrowDown) {
+				if (key.getKind() == Key.Kind.ArrowDown) { //cursor moving down
 					terminal.moveCursor(x,y);
 					y++;
 				}
 				//space moves it diagonally
-				if (key.getCharacter() == ' ') {
+				if (key.getCharacter() == ' ') { //moving to the next position to the right and up one
 					terminal.moveCursor(x,y);
 					y++;
 					x+= 2;
 				}
 
-				if (key.getCharacter() == '1' ||
+				if (key.getCharacter() == '1' || //reads the number the user inputs
 						key.getCharacter() == '2' ||
 						key.getCharacter() == '3' ||
 						key.getCharacter() == '4' ||
@@ -151,15 +151,15 @@ public class TerminalDemo{
 						key.getCharacter() == '8' ||
 						key.getCharacter() == '9' ) {
 					terminal.moveCursor(x,y);
-					terminal.putCharacter(key.getCharacter());
+					terminal.putCharacter(key.getCharacter()); //add the number into the position of the cursor
 					//terminal.applySGR(Terminal.SGR.ENTER_BLINK);
-					newBoard.setPuzzle(xcor, ycor, key.getCharacter());
+					newBoard.setPuzzle(xcor, ycor, key.getCharacter()); //add the number added to the puzzle array
 				}
 
 				if (key.getKind() == Key.Kind.Backspace) {
 					terminal.moveCursor(x, y);
-					terminal.putCharacter(' ');
-					newBoard.setPuzzle(xcor, ycor, '_');
+					terminal.putCharacter(' '); //replace the last inputted number with an empty space
+					newBoard.setPuzzle(xcor, ycor, '_'); //replace the char value with the '_' in the puzzle array
 				}
 
 				if (key.getCharacter() == 'c') {
@@ -168,7 +168,7 @@ public class TerminalDemo{
 
 				if (key.getCharacter() == 'ç') {
 					terminal.clearScreen();
-					Sudoku cleared = new Sudoku (easy, newBoard.getSeed());
+					Sudoku cleared = new Sudoku (easy, newBoard.getSeed()); //creating a new board with the same seed with no previously inputted numbers
 					newBoard = cleared;
 					terminal.applySGR(Terminal.SGR.ENTER_BOLD);
 					putString(1, 5, terminal, cleared.toString());
@@ -189,12 +189,12 @@ public class TerminalDemo{
 					}
 				}*/
 
-				if (key.getCharacter() == 's') {
+				if (key.getCharacter() == 's') { //user can save the board
 					newBoard.save();
 					putString(0, 21, terminal, "Saved Successful!                                                               ");
 				}
 
-				if (key.getCharacter() == 'r') {
+				if (key.getCharacter() == 'r') { //user can replace current board with the board last saved
 					putString(0, 21, terminal, "Do you want to retrieve your last saved board? Select option + r if yes.");
 				}
 
@@ -203,7 +203,7 @@ public class TerminalDemo{
 					putString(1, 24, terminal, newBoard.myBoard());
 				}
 
-				if (key.getCharacter() == 'h') {
+				if (key.getCharacter() == 'h') { //add a hint in the puzzle
 					newBoard.hint();
 				}
 
@@ -221,7 +221,7 @@ public class TerminalDemo{
 			//DO EVEN WHEN NO KEY PRESSED:
 			long tEnd = System.currentTimeMillis();
 			long millis = tEnd - tStart;
-			putString(1,2,terminal,"Milliseconds since start of program: "+millis);
+			putString(1,2,terminal,"Milliseconds since start of program: "+millis); //times the user how long it takes to execute the sudoku board
 			if(millis/1000 > lastSecond){
 				lastSecond = millis / 1000;
 				//one second has passed.
