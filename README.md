@@ -16,4 +16,4 @@ Development Log
 
 1/09: We both realized the save method isn't working properly and we had a collaborative effort on trying to fix how the code reads the Sudoku board and prints it out in the terminal. 
 
-1/10: 
+1/10: Kaitlyn fixed the problem with saving and retrieving the board. After testing the driver multiple times, we realized the problem was not in the save method, but actually in the TerminalDemo file. The xcor and ycor of the char did not take into account the spaces between the board, so we have fixed that.
