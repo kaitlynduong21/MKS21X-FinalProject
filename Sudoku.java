@@ -159,6 +159,13 @@ public class Sudoku{
   public char getOriginal(int x, int y){
     return original[y][x];
   }
+  public char[][] getOriginalPuzzle(){
+    return original;
+  }
+
+  public void reset(char[][] orig) {
+    puzzle = orig;
+  }
 
   public char getPuzzle(int x, int y){
     return puzzle[x][y];

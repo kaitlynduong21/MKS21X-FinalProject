@@ -178,10 +178,9 @@ public class TerminalDemo{
 
 				if (key.getCharacter() == 'ç') {
 					terminal.clearScreen();
-					Sudoku cleared = new Sudoku (easy, newBoard.getSeed()); //creating a new board with the same seed with no previously inputted numbers
-					newBoard = cleared;
+					newBoard.reset(newBoard.getOriginalPuzzle());
 					terminal.applySGR(Terminal.SGR.ENTER_BOLD);
-					putString(1, 5, terminal, cleared.toString());
+					putString(1, 5, terminal, newBoard.toString());
 					terminal.applySGR(Terminal.SGR.EXIT_BOLD);
 					putString(25, 10, terminal, "Board refreshed                                                                 ");
 				}
