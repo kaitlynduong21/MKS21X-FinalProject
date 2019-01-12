@@ -1,7 +1,9 @@
 import java.io.*;
 import java.util.*;
 public class Sudoku{
-  public char[][] puzzle;
+  private char[][] puzzle;
+
+  private char[][] original;
 
   private char[][] answer;
 
@@ -21,6 +23,8 @@ public class Sudoku{
       }
     }
     puzzle = new char[nums.length][nums[0].length];
+    savedBoard = new char[nums.length][nums[0].length];
+    original = new char[nums.length][nums[0].length];
     Random randSeed = new Random ();
     seed = Math.abs((randSeed.nextInt() % 10000));
     randgen = new Random(seed);
@@ -34,7 +38,12 @@ public class Sudoku{
         }
       }
     }
-    savedBoard = puzzle;
+    for (int x = 0; x < nums.length; x ++ ) {
+      for (int y = 0; y < nums[0].length; y ++) {
+        savedBoard[x][y] = puzzle[x][y];
+        original[x][y] = puzzle[x][y];
+      }
+    }
   }
 
   public Sudoku(int[][] nums, int seed1){
@@ -58,9 +67,11 @@ public class Sudoku{
       }
     }
     savedBoard = new char[nums.length][nums[0].length];
+    original = new char[nums.length][nums[0].length];
     for (int x = 0; x < nums.length; x ++ ) {
       for (int y = 0; y < nums[0].length; y ++) {
         savedBoard[x][y] = puzzle[x][y];
+        original[x][y] = puzzle[x][y];
       }
     }
   }
@@ -103,6 +114,25 @@ public class Sudoku{
     return newstr;
   }
 
+  public String originalBoard(){ //displays the last saved board
+    String newstr = "\nOriginal board: \n";
+    for (int x = 0; x < original.length; x ++ ) {
+      for (int y = 0; y < original[0].length; y ++) {
+        if(y % 3 == 2){
+          newstr += "|" + original[x][y] + "| ";
+        }
+        else{
+        newstr+= "|" + original[x][y];
+        }
+      }
+      if(x % 3 == 2){
+        newstr += "\n";
+      }
+      newstr+= "\n";
+    }
+    return newstr;
+  }
+
   public String getKey(){ //displays the answer key
     String newstr = "\nKey: \n";
     for (int x = 0; x < answer.length; x ++ ) {
@@ -124,6 +154,14 @@ public class Sudoku{
 
   public int getSeed(){
     return seed;
+  }
+
+  public char getOriginal(int x, int y){
+    return original[y][x];
+  }
+
+  public char getPuzzle(int x, int y){
+    return puzzle[x][y];
   }
 
   public void setPuzzle(int y, int x, char num) { //changing the values in the sudoku board at a specific position

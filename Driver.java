@@ -14,7 +14,15 @@ public class Driver{
     Sudoku newBoard = new Sudoku(easy, Integer.parseInt(args[0]));
     System.out.println(newBoard);
     System.out.println(newBoard.myBoard());
-    newBoard.setPuzzle(1, 6, '9');
+    System.out.println(newBoard.originalBoard());
+    System.out.println(newBoard.getOriginal(0,0));
+    System.out.println(newBoard.getOriginal(0,1));
+    System.out.println(newBoard.getOriginal(0,2));
+    System.out.println(newBoard.getOriginal(0,3));
+    System.out.println(newBoard.getOriginal(0,4));
+    System.out.println(newBoard.getOriginal(0,5));
+    System.out.println(newBoard.getOriginal(0,6));
+    /*newBoard.setPuzzle(1, 6, '9');
     newBoard.setPuzzle(3, 6, '7');
     System.out.println(newBoard);
     newBoard.save();
@@ -22,6 +30,6 @@ public class Driver{
     System.out.println(newBoard.getKey());
     newBoard.save();
     newBoard.hint();
-    System.out.println(newBoard);
+    System.out.println(newBoard);*/
   }
 }

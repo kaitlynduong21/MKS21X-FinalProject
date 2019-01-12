@@ -94,14 +94,14 @@ public class TerminalDemo{
 			String str = "";
 			if (y == 10 || y == 14 || y >= 18 || y < 7 || x == 7 || x == 15 || x >= 23 || x < 0) {
 				str += "This is not a position on the board. Move your cursor."; //if cursor is in the space between the board and not in a square on the board
-				putString(0 , 20, terminal, str);
+				putString(25 , 11, terminal, str);
 			} else {
 				str += "Current position is "; //tells the user where the cursor is located
 				str += xcor;
 				str += ", ";
 				str += ycor;
 				str += ".                             ";
-				putString(0 , 20, terminal, str);
+				putString(25 , 11, terminal, str);
 			}
 
 			Key key = terminal.readInput();
@@ -140,7 +140,8 @@ public class TerminalDemo{
 					y++;
 					x+= 2;
 				}
-
+				if(newBoard.getOriginal(xcor, ycor) == '_') {
+					putString(25, 7, terminal, "                                                               ");
 				if (key.getCharacter() == '1' || //reads the number the user inputs
 						key.getCharacter() == '2' ||
 						key.getCharacter() == '3' ||
@@ -150,11 +151,15 @@ public class TerminalDemo{
 						key.getCharacter() == '7' ||
 						key.getCharacter() == '8' ||
 						key.getCharacter() == '9' ) {
+
 					terminal.moveCursor(x,y);
 					terminal.putCharacter(key.getCharacter()); //add the number into the position of the cursor
 					//terminal.applySGR(Terminal.SGR.ENTER_BLINK);
 					newBoard.setPuzzle(xcor, ycor, key.getCharacter()); //add the number added to the puzzle array
 				}
+			} else {
+				putString(25, 7, terminal, "This is part of the original puzzle. You cannot change it.");
+			}
 
 				if (key.getKind() == Key.Kind.Backspace) {
 					terminal.moveCursor(x, y);
@@ -163,7 +168,7 @@ public class TerminalDemo{
 				}
 
 				if (key.getCharacter() == 'c') {
-					putString(0, 21, terminal, "Are you sure you want to clear the board? Select option + c if yes.           ");
+					putString(25, 14, terminal, "Are you sure you want to clear the board? Select option + c if yes.           ");
 				}
 
 				if (key.getCharacter() == 'ç') {
@@ -173,29 +178,16 @@ public class TerminalDemo{
 					terminal.applySGR(Terminal.SGR.ENTER_BOLD);
 					putString(1, 5, terminal, cleared.toString());
 					terminal.applySGR(Terminal.SGR.EXIT_BOLD);
-					putString(0, 21, terminal, "Board refreshed                                                                 ");
+					putString(24, 14, terminal, "Board refreshed                                                                 ");
 				}
-
-				/*if (String(0,20).equals("Are you sure you want to clear the board?")) {
-					if (key.getCharacter() == 'y') {
-					terminal.clearScreen();
-					Sudoku cleared = new Sudoku (easy, newBoard.getSeed());
-					//newBoard = cleared
-					putString(1, 5, terminal, cleared.toString());
-					putString(0, 20, terminal, "Board refreshed");
-				} else {
-					if (key.getCharacter() == 'n') {
-						putString(0, 20, terminal, "Board not refreshed");
-					}
-				}*/
 
 				if (key.getCharacter() == 's') { //user can save the board
 					newBoard.save();
-					putString(0, 21, terminal, "Saved Successful!                                                               ");
+					putString(25, 14, terminal, "Saved Successful!                                                               ");
 				}
 
 				if (key.getCharacter() == 'r') { //user can replace current board with the board last saved
-					putString(0, 21, terminal, "Do you want to retrieve your last saved board? Select option + r if yes.");
+					putString(25, 14, terminal, "Do you want to retrieve your last saved board? Select option + r if yes.");
 				}
 
 				if (key.getCharacter() == '®') {
@@ -206,13 +198,6 @@ public class TerminalDemo{
 				if (key.getCharacter() == 'h') { //add a hint in the puzzle
 					newBoard.hint();
 				}
-
-				/*if (key.getCharacter() == 'd') {
-					putString(20, 5, newBoard.myBoard)
-				}*/
-
-
-
 
 				putString(1,4,terminal,"["+key.getCharacter() +"]");
 				putString(1,1,terminal,key+"        ");//to clear leftover letters pad withspaces
