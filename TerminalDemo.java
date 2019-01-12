@@ -55,6 +55,9 @@ public class TerminalDemo{
 			{3, 4, 2, 1, 8, 9, 7, 6, 5},
 		};
 		Sudoku newBoard = new Sudoku(easy);
+		if (args.length == 1) {
+			newBoard = new Sudoku(easy, Integer.parseInt(args[0]));
+		}
 		terminal.applySGR(Terminal.SGR.ENTER_BOLD); //have the board printed to be bolded
 		putString(1, 5, terminal, newBoard.toString()); //printing the board into the terminal
 
@@ -140,6 +143,7 @@ public class TerminalDemo{
 					y++;
 					x+= 2;
 				}
+				if (xcor >= 0 && ycor >= 0) {
 				if(newBoard.getOriginal(xcor, ycor) == '_') {
 					putString(25, 7, terminal, "                                                               ");
 				if (key.getCharacter() == '1' || //reads the number the user inputs
@@ -160,6 +164,7 @@ public class TerminalDemo{
 			} else {
 				putString(25, 7, terminal, "This is part of the original puzzle. You cannot change it.");
 			}
+		}
 
 				if (key.getKind() == Key.Kind.Backspace) {
 					terminal.moveCursor(x, y);
@@ -202,9 +207,9 @@ public class TerminalDemo{
 
 				if (key.getCharacter() == 'e') {
 					if (newBoard.check()){
-						putString (1, 4, terminal, "CONGRATULATIONS! YOU ARE FINISHED!");
+						putString (1, 5, terminal, "CONGRATULATIONS! YOU ARE FINISHED!");
 					} else {
-						putString (1, 4, terminal, "Incorrect:( Try again.");
+						putString (1, 5, terminal, "Incorrect:( Try again.");
 					}
 				}
 
