@@ -209,4 +209,15 @@ public class Sudoku{
     return puzzle[xnum][ynum];
   }
 
+  public boolean check() {
+    for (int x = 0; x < puzzle.length; x++) {
+      for (int y = 0; y < puzzle[0].length; y ++) {
+        if (puzzle[x][y] != answer[x][y]) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
 }

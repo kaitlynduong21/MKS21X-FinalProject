@@ -94,14 +94,14 @@ public class TerminalDemo{
 			String str = "";
 			if (y == 10 || y == 14 || y >= 18 || y < 7 || x == 7 || x == 15 || x >= 23 || x < 0) {
 				str += "This is not a position on the board. Move your cursor."; //if cursor is in the space between the board and not in a square on the board
-				putString(25 , 11, terminal, str);
+				putString(25 , 8, terminal, str);
 			} else {
 				str += "Current position is "; //tells the user where the cursor is located
 				str += xcor;
 				str += ", ";
 				str += ycor;
 				str += ".                             ";
-				putString(25 , 11, terminal, str);
+				putString(25 , 8, terminal, str);
 			}
 
 			Key key = terminal.readInput();
@@ -168,7 +168,7 @@ public class TerminalDemo{
 				}
 
 				if (key.getCharacter() == 'c') {
-					putString(25, 14, terminal, "Are you sure you want to clear the board? Select option + c if yes.           ");
+					putString(25, 10, terminal, "Are you sure you want to clear the board? Select option + c if yes.           ");
 				}
 
 				if (key.getCharacter() == 'ç') {
@@ -178,16 +178,16 @@ public class TerminalDemo{
 					terminal.applySGR(Terminal.SGR.ENTER_BOLD);
 					putString(1, 5, terminal, cleared.toString());
 					terminal.applySGR(Terminal.SGR.EXIT_BOLD);
-					putString(24, 14, terminal, "Board refreshed                                                                 ");
+					putString(25, 10, terminal, "Board refreshed                                                                 ");
 				}
 
 				if (key.getCharacter() == 's') { //user can save the board
 					newBoard.save();
-					putString(25, 14, terminal, "Saved Successful!                                                               ");
+					putString(25, 10, terminal, "Saved Successful!                                                               ");
 				}
 
 				if (key.getCharacter() == 'r') { //user can replace current board with the board last saved
-					putString(25, 14, terminal, "Do you want to retrieve your last saved board? Select option + r if yes.");
+					putString(25, 10, terminal, "Do you want to retrieve your last saved board? Select option + r if yes.");
 				}
 
 				if (key.getCharacter() == '®') {
@@ -197,7 +197,17 @@ public class TerminalDemo{
 
 				if (key.getCharacter() == 'h') { //add a hint in the puzzle
 					newBoard.hint();
+					//if (getOriginal(xcor, ycor) != '_' && (getPuzzle())
 				}
+
+				if (key.getCharacter() == 'e') {
+					if (newBoard.check()){
+						putString (1, 4, terminal, "CONGRATULATIONS! YOU ARE FINISHED!");
+					} else {
+						putString (1, 4, terminal, "Incorrect:( Try again.");
+					}
+				}
+
 
 				putString(1,4,terminal,"["+key.getCharacter() +"]");
 				putString(1,1,terminal,key+"        ");//to clear leftover letters pad withspaces
@@ -213,7 +223,10 @@ public class TerminalDemo{
 				putString(1,3,terminal,"Seconds since start of program: "+lastSecond);
 
 			}
-
+			putString(25, 12, terminal, "Save: s ");
+			putString(25, 13, terminal, "Clear: c");
+			putString(25, 14, terminal, "Hint: h ");
+			putString(25, 15, terminal, "Check: e");
 
 		}
 	}
