@@ -65,6 +65,7 @@ public class TerminalDemo{
 
 
 
+
 			terminal.moveCursor(x,y);
 			terminal.applyBackgroundColor(Terminal.Color.WHITE);
 			terminal.applyForegroundColor(Terminal.Color.BLACK);
@@ -93,6 +94,18 @@ public class TerminalDemo{
 				ycor--;
 			}
 
+			if(newBoard.getOriginal(xcor, ycor) == '_') {
+				putString(25, 7, terminal, "                                                               ");
+			} else {
+				if (y == 10 || y == 14 || y >= 18 || y < 7 || x == 7 || x == 15 || x >= 23 || x < 0) {
+					putString(25, 7, terminal, "                                                               ");
+				} else {
+				putString(25, 7, terminal, "This is part of the original puzzle. You cannot change it.");
+			}
+		}
+
+
+
 			String str = "";
 			if (y == 10 || y == 14 || y >= 18 || y < 7 || x == 7 || x == 15 || x >= 23 || x < 0) {
 				str += "This is not a position on the board. Move your cursor."; //if cursor is in the space between the board and not in a square on the board
@@ -107,6 +120,7 @@ public class TerminalDemo{
 			}
 
 			Key key = terminal.readInput();
+
 
 			if (key != null)
 			{
@@ -160,8 +174,6 @@ public class TerminalDemo{
 					//terminal.applySGR(Terminal.SGR.ENTER_BLINK);
 					newBoard.setPuzzle(xcor, ycor, key.getCharacter()); //add the number added to the puzzle array
 				}
-			} else {
-				putString(25, 7, terminal, "This is part of the original puzzle. You cannot change it.");
 			}
 		}
 

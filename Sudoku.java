@@ -220,8 +220,6 @@ public class Sudoku{
       ynum = Math.abs(randNum.nextInt() % 9);
       tries--;
     }
-    //puzzle[xnum][ynum] = answer[xnum][ynum]; //add the random value from the key to the puzzle
-    //return puzzle[xnum][ynum];
   }
 
   public boolean check() {
