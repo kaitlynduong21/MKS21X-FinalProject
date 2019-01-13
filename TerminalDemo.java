@@ -178,7 +178,8 @@ public class TerminalDemo{
 					y++;
 					x+= 2;
 				}
-				if (xcor >= 0 && ycor >= 0) {
+
+				if (xcor >= 0 && ycor >= 0 && y != 10 && y != 14 && y < 18 && y >= 7 && x != 7 && x != 15 && x <= 23) {
 				if(newBoard.getOriginal(xcor, ycor) == '_') {
 					putString(25, 7, terminal, "                                                               ");
 				if (key.getCharacter() == '1' || //reads the number the user inputs
@@ -193,7 +194,6 @@ public class TerminalDemo{
 
 					terminal.moveCursor(x,y);
 					terminal.putCharacter(key.getCharacter()); //add the number into the position of the cursor
-					//terminal.applySGR(Terminal.SGR.ENTER_BLINK);
 					newBoard.setPuzzle(xcor, ycor, key.getCharacter()); //add the number added to the puzzle array
 				}
 			}
@@ -201,7 +201,12 @@ public class TerminalDemo{
 
 				if (key.getKind() == Key.Kind.Backspace) {
 					terminal.moveCursor(x, y);
-					terminal.putCharacter(' '); //replace the last inputted number with an empty space
+					terminal.applySGR(Terminal.SGR.ENTER_BOLD);
+					terminal.putCharacter('_'); //replace the last inputted number with an empty space
+					terminal.applySGR(Terminal.SGR.EXIT_BOLD);
+					if (y == 10 || y == 14 || y >= 18 || y < 7 || x == 7 || x == 15 || x >= 23) {
+						terminal.putCharacter(' ');
+					}
 					newBoard.setPuzzle(xcor, ycor, '_'); //replace the char value with the '_' in the puzzle array
 				}
 
@@ -256,7 +261,6 @@ public class TerminalDemo{
 								terminal.moveCursor(xx, yy);
 								terminal.applySGR(Terminal.SGR.ENTER_BOLD);
 								terminal.putCharacter(newBoard.getOriginal(xnum, ynum));
-								newBoard.setPuzzle(xnum,ynum, newBoard.getOriginal(xnum,ynum));
 								terminal.applySGR(Terminal.SGR.EXIT_BOLD);
 								terminal.moveCursor(x,y);
 							}
