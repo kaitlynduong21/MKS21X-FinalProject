@@ -256,6 +256,7 @@ public class TerminalDemo{
 								terminal.moveCursor(xx, yy);
 								terminal.applySGR(Terminal.SGR.ENTER_BOLD);
 								terminal.putCharacter(newBoard.getOriginal(xnum, ynum));
+								newBoard.setPuzzle(xnum,ynum, newBoard.getOriginal(xnum,ynum));
 								terminal.applySGR(Terminal.SGR.EXIT_BOLD);
 								terminal.moveCursor(x,y);
 							}
