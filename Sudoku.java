@@ -163,12 +163,16 @@ public class Sudoku{
     return original;
   }
 
-  public void reset(char[][] orig) {
-    puzzle = orig;
+  public void reset() {
+    for (int x = 0; x < original.length; x ++ ) {
+      for (int y = 0; y < original[0].length; y ++) {
+        puzzle[x][y] = original[x][y];
+      }
+    }
   }
 
   public char getPuzzle(int x, int y){
-    return puzzle[x][y];
+    return puzzle[y][x];
   }
 
   public void setPuzzle(int y, int x, char num) { //changing the values in the sudoku board at a specific position
@@ -202,18 +206,22 @@ public class Sudoku{
   }
   }
 
-  public char hint(){
+  public void hint(){
     Random randNum = new Random();
     int xnum = Math.abs(randNum.nextInt() % 9); // random x and y positions
     int ynum = Math.abs(randNum.nextInt() % 9);
     int tries = 1000;
-    while (puzzle[xnum][ynum] != (char)95 && tries > 0){ //if the position is occupied by a number, try again to find an empty position
-      xnum = Math.abs(randNum.nextInt() % 10);
-      ynum = Math.abs(randNum.nextInt() % 10);
+    while (tries > 0){ //if the position is occupied by a number, try again to find an empty position
+      if (puzzle[xnum][ynum] == '_') {
+        original[xnum][ynum] = answer[xnum][ynum];
+        tries = 0;
+      }
+      xnum = Math.abs(randNum.nextInt() % 9);
+      ynum = Math.abs(randNum.nextInt() % 9);
       tries--;
     }
-    puzzle[xnum][ynum] = answer[xnum][ynum]; //add the random value from the key to the puzzle
-    return puzzle[xnum][ynum];
+    //puzzle[xnum][ynum] = answer[xnum][ynum]; //add the random value from the key to the puzzle
+    //return puzzle[xnum][ynum];
   }
 
   public boolean check() {

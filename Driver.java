@@ -14,8 +14,12 @@ public class Driver{
     Sudoku newBoard = new Sudoku(easy, Integer.parseInt(args[0]));
     System.out.println(newBoard);
     System.out.println(newBoard.myBoard());
+    System.out.println(newBoard.getPuzzle(0,1));
     System.out.println(newBoard.originalBoard());
-    System.out.println(newBoard.getKey());
+    newBoard.hint();
+    //System.out.println(newBoard.hint());
+    System.out.println(newBoard);
+    //System.out.println(newBoard.getKey());
     /*newBoard.setPuzzle(1, 6, '9');
     newBoard.setPuzzle(3, 6, '7');
     System.out.println(newBoard);

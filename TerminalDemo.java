@@ -93,7 +93,6 @@ public class TerminalDemo{
 				ycor--;
 			}
 
-
 			String str = "";
 			if (y == 10 || y == 14 || y >= 18 || y < 7 || x == 7 || x == 15 || x >= 23 || x < 0) {
 				str += "This is not a position on the board. Move your cursor."; //if cursor is in the space between the board and not in a square on the board
@@ -178,7 +177,7 @@ public class TerminalDemo{
 
 				if (key.getCharacter() == 'ç') {
 					terminal.clearScreen();
-					newBoard.reset(newBoard.getOriginalPuzzle());
+					newBoard.reset();
 					terminal.applySGR(Terminal.SGR.ENTER_BOLD);
 					putString(1, 5, terminal, newBoard.toString());
 					terminal.applySGR(Terminal.SGR.EXIT_BOLD);
@@ -201,8 +200,34 @@ public class TerminalDemo{
 
 				if (key.getCharacter() == 'h') { //add a hint in the puzzle
 					newBoard.hint();
-					//if (getOriginal(xcor, ycor) != '_' && (getPuzzle())
+					for (int xnum = 0; xnum < 9; xnum ++) {
+						for (int ynum = 0; ynum < 9; ynum ++) {
+							if (newBoard.getOriginal(xnum, ynum) != '_' && (newBoard.getPuzzle(xnum, ynum) != newBoard.getOriginal(xnum, ynum))) {
+								int yy = ynum + 7;
+								double kk = (xnum + 0.5) / 0.5; //setting x and y coordinates
+								if (xnum >= 3) {
+									kk+=2;
+								}
+								if (xnum >= 6) {
+									kk+=2;
+								}
+								int xx = (int)kk;
+
+								if (ynum >= 3) {
+									yy++;
+								}
+								if (ynum >= 6) {
+									yy++;
+								}
+								terminal.moveCursor(xx, yy);
+								terminal.applySGR(Terminal.SGR.ENTER_BOLD);
+								terminal.putCharacter(newBoard.getOriginal(xnum, ynum));
+								terminal.applySGR(Terminal.SGR.EXIT_BOLD);
+								terminal.moveCursor(x,y);
+							}
+						}
 				}
+			}
 
 				if (key.getCharacter() == 'e') {
 					if (newBoard.check()){
