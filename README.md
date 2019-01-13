@@ -21,3 +21,5 @@ Development Log
 1/11: We are working on incorporating the hint feature. We are struggling to add it without messing up the formatting of the board.
 
 1/12: Kaitlyn added the check function and changed the feature of adding numbers so you cannot change numbers part of the original puzzle. Also, we added a "menu" of keys to select to access different features such as hint, check, and clear.
+
+1/13: Kaitlyn fixed the hint feature in the TerminalDemo file, so it will work in the terminal. Sabrina tested the check and hint features altered the hint method in the Sudoku class. Sabrina also added a few more puzzles that will incorporate for different difficulty levels in the future.
