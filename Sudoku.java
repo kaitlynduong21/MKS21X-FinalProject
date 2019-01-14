@@ -159,6 +159,7 @@ public class Sudoku{
   public char getOriginal(int x, int y){
     return original[y][x];
   }
+
   public char[][] getOriginalPuzzle(){
     return original;
   }
@@ -212,7 +213,7 @@ public class Sudoku{
     int ynum = Math.abs(randNum.nextInt() % 9);
     int tries = 1000;
     while (tries > 0){ //if the position is occupied by a number, try again to find an empty position
-      if (puzzle[xnum][ynum] == '_') {
+      if (original[xnum][ynum] == '_') {
         original[xnum][ynum] = answer[xnum][ynum];
         tries = 0;
       }

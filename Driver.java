@@ -16,7 +16,7 @@ public class Driver{
     System.out.println(newBoard.myBoard());
     System.out.println(newBoard.getPuzzle(0,1));
     System.out.println(newBoard.originalBoard());
-    newBoard.hint();
+    newBoard.setPuzzle(1, 6, '9');
     //System.out.println(newBoard.hint());
     System.out.println(newBoard);
     //System.out.println(newBoard.getKey());

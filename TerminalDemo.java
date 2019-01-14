@@ -91,11 +91,6 @@ public class TerminalDemo{
 			terminal.moveCursor(x,y);
 			terminal.applyBackgroundColor(Terminal.Color.WHITE);
 			terminal.applyForegroundColor(Terminal.Color.BLACK);
-			//applySGR(a,b) for multiple modifiers (bold,blink) etc.
-			// /terminal.applySGR(Terminal.SGR.ENTER_BLINK);
-			//terminal.applySGR(Terminal.SGR.ENTER_UNDERLINE);
-			//terminal.putCharacter('\u00a4');
-			//terminal.putCharacter(' ');
 			terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
 			terminal.applyForegroundColor(Terminal.Color.DEFAULT);
 			terminal.applySGR(Terminal.SGR.RESET_ALL);
@@ -116,15 +111,15 @@ public class TerminalDemo{
 				ycor--;
 			}
 
-			if(newBoard.getOriginal(xcor, ycor) == '_') {
+			if(xcor >=0 && xcor < 9 && ycor >= 0 && ycor < 9 && newBoard.getOriginal(xcor, ycor) == '_') {
 				putString(25, 7, terminal, "                                                               ");
 			} else {
 				if (y == 10 || y == 14 || y >= 18 || y < 7 || x == 7 || x == 15 || x >= 23 || x < 0) {
 					putString(25, 7, terminal, "                                                               ");
 				} else {
-				putString(25, 7, terminal, "This is part of the original puzzle. You cannot change it.");
+					putString(25, 7, terminal, "This is part of the original puzzle. You cannot change it.");
+				}
 			}
-		}
 
 
 
@@ -179,10 +174,10 @@ public class TerminalDemo{
 					x+= 2;
 				}
 
-				if (xcor >= 0 && ycor >= 0 && y != 10 && y != 14 && y < 18 && y >= 7 && x != 7 && x != 15 && x <= 23) {
-				if(newBoard.getOriginal(xcor, ycor) == '_') {
-					putString(25, 7, terminal, "                                                               ");
-				if (key.getCharacter() == '1' || //reads the number the user inputs
+				if (xcor >= 0 && ycor >= 0 && xcor < 9 && ycor < 9 && y != 10 && y != 14 && y < 18 && y >= 7 && x != 7 && x != 15 && x <= 21) {
+					if(newBoard.getOriginal(xcor, ycor) == '_') {
+						putString(25, 7, terminal, "                                                               ");
+						if (key.getCharacter() == '1' || //reads the number the user inputs
 						key.getCharacter() == '2' ||
 						key.getCharacter() == '3' ||
 						key.getCharacter() == '4' ||
@@ -192,12 +187,12 @@ public class TerminalDemo{
 						key.getCharacter() == '8' ||
 						key.getCharacter() == '9' ) {
 
-					terminal.moveCursor(x,y);
-					terminal.putCharacter(key.getCharacter()); //add the number into the position of the cursor
-					newBoard.setPuzzle(xcor, ycor, key.getCharacter()); //add the number added to the puzzle array
+							terminal.moveCursor(x,y);
+							terminal.putCharacter(key.getCharacter()); //add the number into the position of the cursor
+							newBoard.setPuzzle(xcor, ycor, key.getCharacter()); //add the number added to the puzzle array
+						}
+					}
 				}
-			}
-		}
 
 				if (key.getKind() == Key.Kind.Backspace) {
 					terminal.moveCursor(x, y);
@@ -261,12 +256,13 @@ public class TerminalDemo{
 								terminal.moveCursor(xx, yy);
 								terminal.applySGR(Terminal.SGR.ENTER_BOLD);
 								terminal.putCharacter(newBoard.getOriginal(xnum, ynum));
+								newBoard.setPuzzle(xnum,ynum, newBoard.getOriginal(xnum,ynum));
 								terminal.applySGR(Terminal.SGR.EXIT_BOLD);
 								terminal.moveCursor(x,y);
 							}
 						}
+					}
 				}
-			}
 
 				if (key.getCharacter() == 'e') {
 					if (newBoard.check()){
