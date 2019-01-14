@@ -229,7 +229,7 @@ public class SudokuGame{
 
 				if (key.getCharacter() == '$') {
 					//terminal.clearScreen();
-					putString(1, 24, terminal, newBoard.myBoard());
+					putString(1, 20, terminal, newBoard.myBoard());
 				}
 
 				if (key.getCharacter() == 'h') { //add a hint in the puzzle
