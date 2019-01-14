@@ -268,7 +268,7 @@ public class TerminalDemo{
 					if (newBoard.check()){
 						putString (1, 5, terminal, "CONGRATULATIONS! YOU ARE FINISHED!");
 					} else {
-						putString (1, 5, terminal, "Incorrect:( Try again.");
+						putString (1, 5, terminal, "Incorrect:( Try again.             ");
 					}
 				}
 
