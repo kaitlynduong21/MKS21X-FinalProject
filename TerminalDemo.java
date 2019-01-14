@@ -206,10 +206,10 @@ public class TerminalDemo{
 				}
 
 				if (key.getCharacter() == 'c') {
-					putString(25, 10, terminal, "Are you sure you want to clear the board? Select option + c if yes.           ");
+					putString(25, 10, terminal, "Are you sure you want to clear the board? Select shift + 2 if yes.           ");
 				}
 
-				if (key.getCharacter() == 'ç') {
+				if (key.getCharacter() == '@') {
 					terminal.clearScreen();
 					newBoard.reset();
 					terminal.applySGR(Terminal.SGR.ENTER_BOLD);
@@ -224,10 +224,10 @@ public class TerminalDemo{
 				}
 
 				if (key.getCharacter() == 'r') { //user can replace current board with the board last saved
-					putString(25, 10, terminal, "Do you want to retrieve your last saved board? Select option + r if yes.");
+					putString(25, 10, terminal, "Do you want to retrieve your last saved board? Select shift + 4 if yes.");
 				}
 
-				if (key.getCharacter() == '®') {
+				if (key.getCharacter() == '$') {
 					//terminal.clearScreen();
 					putString(1, 24, terminal, newBoard.myBoard());
 				}
