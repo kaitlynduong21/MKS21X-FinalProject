@@ -291,6 +291,7 @@ public class TerminalDemo{
 			putString(25, 13, terminal, "Clear: c");
 			putString(25, 14, terminal, "Hint: h ");
 			putString(25, 15, terminal, "Check: e");
+			putString(25, 16, terminal, "Get Saved Board: r");
 
 		}
 	}
