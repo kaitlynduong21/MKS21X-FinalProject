@@ -18,7 +18,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 
-public class TerminalDemo{
+public class SudokuGame{
 
 	public static void putString(int r, int c,Terminal t, String s){
 		t.moveCursor(r,c);
