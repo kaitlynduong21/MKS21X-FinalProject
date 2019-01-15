@@ -85,9 +85,6 @@ public class SudokuGame{
 
 		while(running){
 
-
-
-
 			terminal.moveCursor(x,y);
 			terminal.applyBackgroundColor(Terminal.Color.WHITE);
 			terminal.applyForegroundColor(Terminal.Color.BLACK);
@@ -150,6 +147,7 @@ public class SudokuGame{
 
 				if (key.getKind() == Key.Kind.ArrowLeft) { //cursor moving to the left
 					terminal.moveCursor(x,y);
+					//terminal.applyForegroundColor(Terminal.Color.BLUE);
 					x-= 2;
 				}
 
@@ -278,6 +276,8 @@ public class SudokuGame{
 				putString(1,4,terminal,"["+key.getCharacter() +"]");
 				putString(1,1,terminal,key+"        ");//to clear leftover letters pad withspaces
 			}
+
+			terminal.applyForegroundColor(Terminal.Color.DEFAULT);
 
 			//DO EVEN WHEN NO KEY PRESSED:
 			long tEnd = System.currentTimeMillis();
