@@ -194,6 +194,7 @@ public class SudokuGame{
 					}
 				}
 
+				if(newBoard.getOriginal(xcor, ycor) == '_') {
 				if (key.getKind() == Key.Kind.Backspace) {
 					terminal.moveCursor(x, y);
 					terminal.applySGR(Terminal.SGR.ENTER_BOLD);
@@ -204,6 +205,7 @@ public class SudokuGame{
 					}
 					newBoard.setPuzzle(xcor, ycor, '_'); //replace the char value with the '_' in the puzzle array
 				}
+			}
 
 				if (key.getCharacter() == 'c') {
 					putString(25, 10, terminal, "Are you sure you want to clear the board? Select shift + 2 if yes.           ");
