@@ -27,7 +27,14 @@ public class SudokuGame{
 		}
 	}
 	public static void main(String[] args) {
-
+		String difficulty = "";
+		if(args.length < 1){
+			System.out.println("Enter in a difficulty level: easy, medium, hard");
+			System.exit(1);
+		}
+		else{
+			args[0] = difficulty;
+		}
 
 		int x = 1;
 		int y = 7;
@@ -42,7 +49,7 @@ public class SudokuGame{
 
 		long tStart = System.currentTimeMillis();
 		long lastSecond = 0;
-		int[][] hard = new int[][]{
+		int[][] hardBoard = new int[][]{
 			{1, 5, 2, 4, 8, 9, 3, 7, 6},
 			{7, 3, 9, 2, 5, 6, 8, 4, 1},
 			{4, 6, 8, 3, 7, 1, 2, 9, 5},
@@ -53,7 +60,7 @@ public class SudokuGame{
 			{6, 2, 5, 9, 4, 8, 1, 3, 6},
 			{8, 7, 3, 5, 1, 2, 9, 6, 4},
 		};
-		int[][] medium = new int[][]{
+		int[][] mediumBoard = new int[][]{
 			{5, 3, 4, 6, 7, 8, 9, 1, 2},
 			{6, 7, 2, 1, 9, 5, 3, 4, 8},
 			{1, 9, 8, 3, 4, 2, 5, 6, 7},
@@ -65,7 +72,7 @@ public class SudokuGame{
 			{3, 4, 5, 2, 8, 6, 1, 7, 9},
 		};
 
-		int[][] easy = new int[][]{
+		int[][] easyBoard = new int[][]{
 			{2, 9, 6, 3, 1, 8, 5, 7, 4},
 			{5, 8, 4, 9, 7, 2, 6, 1 ,3},
 			{7, 1, 3, 6, 4, 5, 2, 8, 9},
@@ -76,9 +83,24 @@ public class SudokuGame{
 			{8, 5, 9, 7, 6, 4, 1, 3, 2},
 			{3, 4, 2, 1, 8, 9, 7, 6, 5},
 		};
-		Sudoku newBoard = new Sudoku(easy);
-		if (args.length == 1) {
-			newBoard = new Sudoku(easy, Integer.parseInt(args[0]));
+		Sudoku newBoard = new Sudoku(easyBoard, "easy");
+		if(difficulty.equals("easy")){
+			newBoard = new Sudoku(easyBoard, "easy");
+			if (args.length == 1) {
+				newBoard = new Sudoku(easyBoard, Integer.parseInt(args[0]));
+			}
+		}
+		if(difficulty.equals("medium")){
+			newBoard = new Sudoku(mediumBoard, "medium");
+			if (args.length == 1) {
+				newBoard = new Sudoku(mediumBoard, Integer.parseInt(args[0]));
+			}
+		}
+		if(difficulty.equals("hard")){
+			newBoard = new Sudoku(hardBoard, "hard");
+			if (args.length == 1) {
+				newBoard = new Sudoku(hardBoard, Integer.parseInt(args[0]));
+			}
 		}
 		terminal.applySGR(Terminal.SGR.ENTER_BOLD); //have the board printed to be bolded
 		putString(1, 5, terminal, newBoard.toString()); //printing the board into the terminal

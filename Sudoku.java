@@ -15,7 +15,7 @@ public class Sudoku{
 
   private Random randgen;
 
-  public Sudoku(int[][] nums){
+  public Sudoku(int[][] nums, String level){
     answer = new char[nums.length][nums[0].length];
     for (int x = 0; x < nums.length; x ++ ) {
       for (int y = 0; y < nums[0].length; y ++) {
@@ -26,11 +26,23 @@ public class Sudoku{
     savedBoard = new char[nums.length][nums[0].length];
     original = new char[nums.length][nums[0].length];
     Random randSeed = new Random ();
+    int rand = 0;
     seed = Math.abs((randSeed.nextInt() % 10000));
     randgen = new Random(seed);
     for (int x = 0; x < nums.length; x ++ ) {
       for (int y = 0; y < nums[0].length; y ++) {
-        int rand = randgen.nextInt() % 2; //finding random positions to place the numbers on the board
+        if(level.equals("easy")){
+          difficulty = "easy";
+          rand = randgen.nextInt() % 2; //finding random positions to place the numbers on the board
+        }
+        if(level.equals("medium")){
+          difficulty = "medium";
+          rand = randgen.nextInt() % 3;
+        }
+        if(level.equals("hard")){
+          difficulty = "hard";
+          rand = randgen.nextInt() % 4;
+        }
         if (rand == 1) {
           puzzle[x][y] = (char)(nums[x][y] + 48); //displaying char values on board at some positions
         } else {
@@ -56,9 +68,18 @@ public class Sudoku{
     puzzle = new char[nums.length][nums[0].length];
     randgen = new Random(seed1);
     seed = seed1;
+    int rand = 0;
     for (int x = 0; x < nums.length; x ++ ) {
       for (int y = 0; y < nums[0].length; y ++) {
-        int rand = randgen.nextInt() % 2;
+        if(difficulty == "easy"){
+          rand = randgen.nextInt() % 2; //finding random positions to place the numbers on the board
+        }
+        if(difficulty == "medium"){
+          rand = randgen.nextInt() % 3;
+        }
+        if(difficulty == "hard"){
+          rand = randgen.nextInt() % 4;
+        }
         if (rand == 1) {
           puzzle[x][y] = (char)(nums[x][y] + 48);
         } else {
