@@ -84,24 +84,33 @@ public class SudokuGame{
 			{3, 4, 2, 1, 8, 9, 7, 6, 5},
 		};
 		Sudoku newBoard = new Sudoku(easyBoard, "easy");
-		if(difficulty.equals("easy")){
-			newBoard = new Sudoku(easyBoard, "easy");
-			if (args.length == 1) {
-				newBoard = new Sudoku(easyBoard, Integer.parseInt(args[0]));
+		if(args[0].trim().equals("easy")) {
+			 newBoard = new Sudoku(easyBoard, "easy");
+		} else {
+			if(args[0].trim().equals("medium")){
+				 newBoard = new Sudoku(mediumBoard, "medium");
+			} else {
+					 newBoard = new Sudoku(hardBoard, "hard");
 			}
 		}
-		if(difficulty.equals("medium")){
+
+		/*if(args[0].equals("easy") && args.length == 2){
+				newBoard = new Sudoku(easyBoard, Integer.parseInt(args[1]));
+			}
+		if(args[0].equals("medium")){
 			newBoard = new Sudoku(mediumBoard, "medium");
-			if (args.length == 1) {
-				newBoard = new Sudoku(mediumBoard, Integer.parseInt(args[0]));
+			if (args.length == 2) {
+				newBoard = new Sudoku(mediumBoard, Integer.parseInt(args[1]));
 			}
 		}
-		if(difficulty.equals("hard")){
+
+		if(args[0].equals("hard")){
 			newBoard = new Sudoku(hardBoard, "hard");
-			if (args.length == 1) {
-				newBoard = new Sudoku(hardBoard, Integer.parseInt(args[0]));
+			if (args.length == 2) {
+				newBoard = new Sudoku(hardBoard, Integer.parseInt(args[1]));
 			}
-		}
+		}*/
+
 		terminal.applySGR(Terminal.SGR.ENTER_BOLD); //have the board printed to be bolded
 		putString(1, 5, terminal, newBoard.toString()); //printing the board into the terminal
 

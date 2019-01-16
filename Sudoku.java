@@ -32,15 +32,15 @@ public class Sudoku{
     for (int x = 0; x < nums.length; x ++ ) {
       for (int y = 0; y < nums[0].length; y ++) {
         if(level.equals("easy")){
-          difficulty = "easy";
+          difficulty = level;
           rand = randgen.nextInt() % 2; //finding random positions to place the numbers on the board
         }
         if(level.equals("medium")){
-          difficulty = "medium";
+          difficulty = level;
           rand = randgen.nextInt() % 3;
         }
         if(level.equals("hard")){
-          difficulty = "hard";
+          difficulty = level;
           rand = randgen.nextInt() % 4;
         }
         if (rand == 1) {
