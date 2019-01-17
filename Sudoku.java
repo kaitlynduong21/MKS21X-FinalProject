@@ -16,6 +16,7 @@ public class Sudoku{
   private Random randgen;
 
   public Sudoku(int[][] nums, String level){
+    difficulty = level;
     answer = new char[nums.length][nums[0].length];
     for (int x = 0; x < nums.length; x ++ ) {
       for (int y = 0; y < nums[0].length; y ++) {
@@ -26,30 +27,39 @@ public class Sudoku{
     savedBoard = new char[nums.length][nums[0].length];
     original = new char[nums.length][nums[0].length];
     Random randSeed = new Random ();
-    int rand = 0;
     seed = Math.abs((randSeed.nextInt() % 10000));
     randgen = new Random(seed);
+    int rand;
+    int count = 0;
+    if(difficulty == "easy"){
+      count = 30; //finding random positions to place the numbers on the board
+    }
+    if(difficulty == "medium"){
+      count = 25;
+    }
+    if(difficulty == "hard"){
+      count = 20;
+    }
     for (int x = 0; x < nums.length; x ++ ) {
       for (int y = 0; y < nums[0].length; y ++) {
-        if(level.equals("easy")){
-          difficulty = level;
-          rand = randgen.nextInt() % 2; //finding random positions to place the numbers on the board
-        }
-        if(level.equals("medium")){
-          difficulty = level;
-          rand = randgen.nextInt() % 3;
-        }
-        if(level.equals("hard")){
-          difficulty = level;
-          rand = randgen.nextInt() % 4;
-        }
-        if (rand == 1) {
-          puzzle[x][y] = (char)(nums[x][y] + 48); //displaying char values on board at some positions
-        } else {
-          puzzle[x][y] = (char)95; //displaying '_' at unfilled positions
+        puzzle[x][y] = (char)95;
+      }
+    }
+    while (count > 0) {
+    for (int x = 0; x < nums.length; x ++ ) {
+      for (int y = 0; y < nums[0].length; y ++) {
+        rand = randgen.nextInt() % 2;
+        if (count > 0) {
+        if (rand == 1 && puzzle[x][y] == '_') {
+          puzzle[x][y] = (char)(nums[x][y] + 48);
+          count--;
         }
       }
     }
+  }
+  }
+    savedBoard = new char[nums.length][nums[0].length];
+    original = new char[nums.length][nums[0].length];
     for (int x = 0; x < nums.length; x ++ ) {
       for (int y = 0; y < nums[0].length; y ++) {
         savedBoard[x][y] = puzzle[x][y];
@@ -58,7 +68,8 @@ public class Sudoku{
     }
   }
 
-  public Sudoku(int[][] nums, int seed1){
+  public Sudoku(int[][] nums, String level, int seed1){
+    difficulty = level;
     answer = new char[nums.length][nums[0].length];
     for (int x = 0; x < nums.length; x ++ ) {
       for (int y = 0; y < nums[0].length; y ++) {
@@ -68,25 +79,35 @@ public class Sudoku{
     puzzle = new char[nums.length][nums[0].length];
     randgen = new Random(seed1);
     seed = seed1;
-    int rand = 0;
+    int rand;
+    int count = 0;
+    if(difficulty == "easy"){
+      count = 30; //finding random positions to place the numbers on the board
+    }
+    if(difficulty == "medium"){
+      count = 25;
+    }
+    if(difficulty == "hard"){
+      count = 20;
+    }
     for (int x = 0; x < nums.length; x ++ ) {
       for (int y = 0; y < nums[0].length; y ++) {
-        if(difficulty == "easy"){
-          rand = randgen.nextInt() % 2; //finding random positions to place the numbers on the board
-        }
-        if(difficulty == "medium"){
-          rand = randgen.nextInt() % 3;
-        }
-        if(difficulty == "hard"){
-          rand = randgen.nextInt() % 4;
-        }
-        if (rand == 1) {
+        puzzle[x][y] = (char)95;
+      }
+    }
+    while (count > 0) {
+    for (int x = 0; x < nums.length; x ++ ) {
+      for (int y = 0; y < nums[0].length; y ++) {
+        rand = randgen.nextInt() % 2;
+        if (count > 0) {
+        if (rand == 1 && puzzle[x][y] == '_') {
           puzzle[x][y] = (char)(nums[x][y] + 48);
-        } else {
-          puzzle[x][y] = (char)95;
+          count--;
         }
       }
     }
+  }
+}
     savedBoard = new char[nums.length][nums[0].length];
     original = new char[nums.length][nums[0].length];
     for (int x = 0; x < nums.length; x ++ ) {
