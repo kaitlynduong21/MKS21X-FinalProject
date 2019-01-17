@@ -15,7 +15,30 @@ public class Sudoku{
 
   private Random randgen;
 
-  public Sudoku(int[][] nums, String level){
+  private int[][] nums;
+
+  public Sudoku(String level){
+    Random randSeed = new Random ();
+    seed = Math.abs((randSeed.nextInt() % 10000));
+    randgen = new Random(seed);
+    nums = new char[9][9];
+    try{
+    File file = new File("EasyBoards.txt");
+    Scanner in = new Scanner(file);
+    int i = randgen.nextInt() % 2;
+    for (int k = 0; k < i * 9; k++) {
+      in.next();
+    }
+    for (int x = 0; x < nums.length; x ++ ) {
+      for (int y = 0; y < nums[0].length; y ++) {
+        String num = in.next();
+        nums[x][y] = Integer.parseint(num); //copying over char values to answer
+      }
+    }
+} catch (FileNotFoundException e) {
+  System.out.println("File not found");
+  System.exti(1);
+}
     difficulty = level;
     answer = new char[nums.length][nums[0].length];
     for (int x = 0; x < nums.length; x ++ ) {
@@ -49,7 +72,7 @@ public class Sudoku{
     for (int x = 0; x < nums.length; x ++ ) {
       for (int y = 0; y < nums[0].length; y ++) {
         rand = randgen.nextInt() % 2;
-        if (count > 0) {
+        //if (count > 0) {
         if (rand == 1 && puzzle[x][y] == '_') {
           puzzle[x][y] = (char)(nums[x][y] + 48);
           count--;
@@ -57,7 +80,7 @@ public class Sudoku{
       }
     }
   }
-  }
+
     savedBoard = new char[nums.length][nums[0].length];
     original = new char[nums.length][nums[0].length];
     for (int x = 0; x < nums.length; x ++ ) {

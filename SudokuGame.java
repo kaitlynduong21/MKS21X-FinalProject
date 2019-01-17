@@ -85,7 +85,7 @@ public class SudokuGame{
 			{3, 4, 2, 1, 8, 9, 7, 6, 5},
 		};
 		Sudoku newBoard = new Sudoku(easyBoard1, "easy");
-		int[][] easyBoard = new int [9][9];
+		/*int[][] easyBoard = new int [9][9];
 		if(args[0].trim().equals("easy")) {
 			try{
 				File f = new File("EasyBoards.txt");
@@ -104,13 +104,13 @@ public class SudokuGame{
 			 System.out.println("Easy Board text file not found");
 			 System.exit(1);
 		 }
-		} else {
+	 } else {*/
 			if(args[0].equals("medium")){
 				 newBoard = new Sudoku(mediumBoard, "medium");
 			} else {
 					 newBoard = new Sudoku(hardBoard, "hard");
 			}
-		}
+		//}
 
 		/*if(args[0].equals("easy") && args.length == 2){
 				newBoard = new Sudoku(easyBoard, Integer.parseInt(args[1]));
@@ -370,7 +370,7 @@ public class SudokuGame{
 				}
 
 				if (key.getCharacter() == 'E') { //moving to the next position to the right and up one
-					newBoard = new Sudoku (easyBoard, "easy");
+					newBoard = new Sudoku (easyBoard1, "easy");
 					terminal.applySGR(Terminal.SGR.ENTER_BOLD);
 					putString(1, 5, terminal, newBoard.toString());
 					terminal.applySGR(Terminal.SGR.EXIT_BOLD);
