@@ -18,7 +18,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 
-public class SudokuGame{
+public class TerminalDemo{
 
 	public static void putString(int r, int c,Terminal t, String s){
 		t.moveCursor(r,c);
@@ -27,14 +27,7 @@ public class SudokuGame{
 		}
 	}
 	public static void main(String[] args) {
-		String difficulty = "";
-		if(args.length < 1){
-			System.out.println("Enter in a difficulty level: easy, medium, hard");
-			System.exit(1);
-		}
-		/*else{
-			args[0] = difficulty;
-		}*/
+
 
 		int x = 1;
 		int y = 7;
@@ -49,7 +42,7 @@ public class SudokuGame{
 
 		long tStart = System.currentTimeMillis();
 		long lastSecond = 0;
-		int[][] hardBoard = new int[][]{
+		int[][] hard = new int[][]{
 			{1, 5, 2, 4, 8, 9, 3, 7, 6},
 			{7, 3, 9, 2, 5, 6, 8, 4, 1},
 			{4, 6, 8, 3, 7, 1, 2, 9, 5},
@@ -60,7 +53,7 @@ public class SudokuGame{
 			{6, 2, 5, 9, 4, 8, 1, 3, 6},
 			{8, 7, 3, 5, 1, 2, 9, 6, 4},
 		};
-		int[][] mediumBoard = new int[][]{
+		int[][] medium = new int[][]{
 			{5, 3, 4, 6, 7, 8, 9, 1, 2},
 			{6, 7, 2, 1, 9, 5, 3, 4, 8},
 			{1, 9, 8, 3, 4, 2, 5, 6, 7},
@@ -72,7 +65,7 @@ public class SudokuGame{
 			{3, 4, 5, 2, 8, 6, 1, 7, 9},
 		};
 
-		int[][] easyBoard = new int[][]{
+		int[][] easy = new int[][]{
 			{2, 9, 6, 3, 1, 8, 5, 7, 4},
 			{5, 8, 4, 9, 7, 2, 6, 1 ,3},
 			{7, 1, 3, 6, 4, 5, 2, 8, 9},
@@ -83,44 +76,17 @@ public class SudokuGame{
 			{8, 5, 9, 7, 6, 4, 1, 3, 2},
 			{3, 4, 2, 1, 8, 9, 7, 6, 5},
 		};
-		Sudoku newBoard = new Sudoku(easyBoard, "easy");
-		if(args[0].trim().equals("easy")) {
-			 newBoard = new Sudoku(easyBoard, "easy");
-		} else {
-			if(args[0].equals("medium")){
-				 newBoard = new Sudoku(mediumBoard, "medium");
-			} else {
-					 newBoard = new Sudoku(hardBoard, "hard");
-			}
+		Sudoku newBoard = new Sudoku(easy);
+		if (args.length == 1) {
+			newBoard = new Sudoku(easy, Integer.parseInt(args[0]));
 		}
-		System.out.println(args[0]);
-		//System.out.println(args[1]);
-		if (args[0].trim().equals("easy")) {
-			System.out.println("true");
-		} else {
-			System.out.println("false");
-		}
-		/*if(args[0].equals("easy") && args.length == 2){
-				newBoard = new Sudoku(easyBoard, Integer.parseInt(args[1]));
-			}
-		if(args[0].equals("medium")){
-			newBoard = new Sudoku(mediumBoard, "medium");
-			if (args.length == 2) {
-				newBoard = new Sudoku(mediumBoard, Integer.parseInt(args[1]));
-			}
-		}
-
-		if(args[0].equals("hard")){
-			newBoard = new Sudoku(hardBoard, "hard");
-			if (args.length == 2) {
-				newBoard = new Sudoku(hardBoard, Integer.parseInt(args[1]));
-			}
-		}*/
-
 		terminal.applySGR(Terminal.SGR.ENTER_BOLD); //have the board printed to be bolded
 		putString(1, 5, terminal, newBoard.toString()); //printing the board into the terminal
 
 		while(running){
+
+
+
 
 			terminal.moveCursor(x,y);
 			terminal.applyBackgroundColor(Terminal.Color.WHITE);
@@ -184,7 +150,6 @@ public class SudokuGame{
 
 				if (key.getKind() == Key.Kind.ArrowLeft) { //cursor moving to the left
 					terminal.moveCursor(x,y);
-					//terminal.applyForegroundColor(Terminal.Color.BLUE);
 					x-= 2;
 				}
 
@@ -229,7 +194,6 @@ public class SudokuGame{
 					}
 				}
 
-				if(newBoard.getOriginal(xcor, ycor) == '_') {
 				if (key.getKind() == Key.Kind.Backspace) {
 					terminal.moveCursor(x, y);
 					terminal.applySGR(Terminal.SGR.ENTER_BOLD);
@@ -240,7 +204,6 @@ public class SudokuGame{
 					}
 					newBoard.setPuzzle(xcor, ycor, '_'); //replace the char value with the '_' in the puzzle array
 				}
-			}
 
 				if (key.getCharacter() == 'c') {
 					putString(25, 10, terminal, "Are you sure you want to clear the board? Select shift + 2 if yes.           ");
@@ -266,7 +229,7 @@ public class SudokuGame{
 
 				if (key.getCharacter() == '$') {
 					//terminal.clearScreen();
-					putString(1, 20, terminal, newBoard.myBoard());
+					putString(1, 24, terminal, newBoard.myBoard());
 				}
 
 				if (key.getCharacter() == 'h') { //add a hint in the puzzle
@@ -313,8 +276,6 @@ public class SudokuGame{
 				putString(1,4,terminal,"["+key.getCharacter() +"]");
 				putString(1,1,terminal,key+"        ");//to clear leftover letters pad withspaces
 			}
-
-			terminal.applyForegroundColor(Terminal.Color.DEFAULT);
 
 			//DO EVEN WHEN NO KEY PRESSED:
 			long tEnd = System.currentTimeMillis();

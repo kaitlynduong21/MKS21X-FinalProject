@@ -11,7 +11,7 @@ public class Driver{
       {8, 5, 9, 7, 6, 4, 1, 3, 2},
       {3, 4, 2, 1, 8, 9, 7, 6, 5},
     };
-    Sudoku newBoard = new Sudoku(easy, Integer.parseInt(args[0]));
+    Sudoku newBoard = new Sudoku(easy, "easy");
     System.out.println(newBoard);
     System.out.println(newBoard.myBoard());
     System.out.println(newBoard.getPuzzle(0,1));
@@ -19,6 +19,12 @@ public class Driver{
     newBoard.setPuzzle(1, 6, '9');
     //System.out.println(newBoard.hint());
     System.out.println(newBoard);
+    if (args[0].equals("easy")) {
+      System.out.println("true");
+    } else {
+      System.out.println("false");
+    }
+    System.out.println(args[0]);
     //System.out.println(newBoard.getKey());
     /*newBoard.setPuzzle(1, 6, '9');
     newBoard.setPuzzle(3, 6, '7');
