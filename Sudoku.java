@@ -21,23 +21,22 @@ public class Sudoku{
     Random randSeed = new Random ();
     seed = Math.abs((randSeed.nextInt() % 10000));
     randgen = new Random(seed);
-    nums = new char[9][9];
+    nums = new int[9][9];
     try{
-    File file = new File("EasyBoards.txt");
+    File file = new File("Puzzles.txt");
     Scanner in = new Scanner(file);
-    int i = randgen.nextInt() % 2;
-    for (int k = 0; k < i * 9; k++) {
-      in.next();
+    int i = Math.abs(randgen.nextInt() % 2);
+    for (int k = 0; k < i * 10 + 1; k++) {
+      in.nextLine();
     }
-    for (int x = 0; x < nums.length; x ++ ) {
-      for (int y = 0; y < nums[0].length; y ++) {
-        String num = in.next();
-        nums[x][y] = Integer.parseint(num); //copying over char values to answer
-      }
+    for (int x = 0; x < 9; x ++ ) {
+      for (int y = 0; y < 9; y ++) {
+        nums[x][y] = in.nextInt(); //copying over char values to answer
     }
-} catch (FileNotFoundException e) {
+  }
+  } catch (FileNotFoundException e) {
   System.out.println("File not found");
-  System.exti(1);
+  System.exit(1);
 }
     difficulty = level;
     answer = new char[nums.length][nums[0].length];
@@ -49,9 +48,9 @@ public class Sudoku{
     puzzle = new char[nums.length][nums[0].length];
     savedBoard = new char[nums.length][nums[0].length];
     original = new char[nums.length][nums[0].length];
-    Random randSeed = new Random ();
+    /*Random randSeed = new Random ();
     seed = Math.abs((randSeed.nextInt() % 10000));
-    randgen = new Random(seed);
+    randgen = new Random(seed);*/
     int rand;
     int count = 0;
     if(difficulty == "easy"){
