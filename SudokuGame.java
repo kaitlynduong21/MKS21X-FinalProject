@@ -93,13 +93,7 @@ public class SudokuGame{
 					 newBoard = new Sudoku(hardBoard, "hard");
 			}
 		}
-		System.out.println(args[0]);
-		//System.out.println(args[1]);
-		if (args[0].trim().equals("easy")) {
-			System.out.println("true");
-		} else {
-			System.out.println("false");
-		}
+
 		/*if(args[0].equals("easy") && args.length == 2){
 				newBoard = new Sudoku(easyBoard, Integer.parseInt(args[1]));
 			}
@@ -158,17 +152,12 @@ public class SudokuGame{
 
 
 			String str = "";
-			if (y == 10 || y == 14 || y >= 18 || y < 7 || x == 7 || x == 15 || x >= 23 || x < 0) {
-				str += "This is not a position on the board. Move your cursor."; //if cursor is in the space between the board and not in a square on the board
-				putString(25 , 8, terminal, str);
-			} else {
 				str += "Current position is "; //tells the user where the cursor is located
 				str += xcor;
 				str += ", ";
 				str += ycor;
-				str += ".                             ";
+				str += ".";
 				putString(25 , 8, terminal, str);
-			}
 
 			Key key = terminal.readInput();
 
@@ -183,24 +172,73 @@ public class SudokuGame{
 				}
 
 				if (key.getKind() == Key.Kind.ArrowLeft) { //cursor moving to the left
-					terminal.moveCursor(x,y);
+					//erminal.moveCursor(x,y);
+					if (xcor != 0) {
 					//terminal.applyForegroundColor(Terminal.Color.BLUE);
+					terminal.moveCursor(x,y);
 					x-= 2;
+					if (x == 7) {
+						x-= 2;
+					}
+					if (x == 15) {
+						x-= 2;
+					}
+					putString(25, 9, terminal, "                                             ");
+				} else {
+					putString(25, 9, terminal, "You cannot move past this point on the board.");
+				}
 				}
 
 				if (key.getKind() == Key.Kind.ArrowRight) { //cursor moving to the right
+					if (xcor != 8) {
+					//terminal.applyForegroundColor(Terminal.Color.BLUE);
 					terminal.moveCursor(x,y);
 					x+= 2;
+					if (x == 7) {
+						x+= 2;
+					}
+					if (x == 15) {
+						x+= 2;
+					}
+					putString(25, 9, terminal, "                                             ");
+				} else {
+					putString(25, 9, terminal, "You cannot move past this point on the board.");
+				}
 				}
 
 				if (key.getKind() == Key.Kind.ArrowUp) { //cursor moving up
+					if (ycor != 0) {
+					//terminal.applyForegroundColor(Terminal.Color.BLUE);
 					terminal.moveCursor(x,y);
 					y--;
+					if (y == 10) {
+						y --;
+					}
+					if (y == 14) {
+						y --;
+					}
+					putString(25, 9, terminal, "                                             ");
+				} else {
+					putString(25, 9, terminal, "You cannot move past this point on the board.");
+				}
 				}
 
 				if (key.getKind() == Key.Kind.ArrowDown) { //cursor moving down
+					if (ycor != 8) {
+					//terminal.applyForegroundColor(Terminal.Color.BLUE);
 					terminal.moveCursor(x,y);
 					y++;
+
+					if (y == 10) {
+						y ++;
+					}
+					if (y == 14) {
+						y ++;
+					}
+					putString(25, 9, terminal, "                                             ");
+				} else {
+					putString(25, 9, terminal, "You cannot move past this point on the board.");
+				}
 				}
 				//space moves it diagonally
 				if (key.getCharacter() == ' ') { //moving to the next position to the right and up one
