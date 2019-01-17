@@ -347,6 +347,24 @@ public class SudokuGame{
 					}
 				}
 
+				if (key.getCharacter() == 'n') { //moving to the next position to the right and up one
+					putString(25, 10, terminal, "Do you want to get a new board? If yes, select 'E', 'M', or 'H'");
+				}
+
+				if (key.getCharacter() == 'E') { //moving to the next position to the right and up one
+					newBoard = new Sudoku (easyBoard, "easy");
+					putString(1, 5, terminal, newBoard.toString());
+				}
+				if (key.getCharacter() == 'M') { //moving to the next position to the right and up one
+					newBoard = new Sudoku (mediumBoard, "medium");
+					putString(1, 5, terminal, newBoard.toString());
+				}
+				if (key.getCharacter() == 'H') { //moving to the next position to the right and up one
+					newBoard = new Sudoku (hardBoard, "hard");
+					putString(1, 5, terminal, newBoard.toString());
+				}
+
+
 
 				putString(1,4,terminal,"["+key.getCharacter() +"]");
 				putString(1,1,terminal,key+"        ");//to clear leftover letters pad withspaces
@@ -369,6 +387,7 @@ public class SudokuGame{
 			putString(25, 14, terminal, "Hint: h ");
 			putString(25, 15, terminal, "Check: e");
 			putString(25, 16, terminal, "Get Saved Board: r");
+			putString(25, 17, terminal, "Get New Board: n");
 
 		}
 	}
