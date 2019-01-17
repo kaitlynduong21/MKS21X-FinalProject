@@ -353,15 +353,23 @@ public class SudokuGame{
 
 				if (key.getCharacter() == 'E') { //moving to the next position to the right and up one
 					newBoard = new Sudoku (easyBoard, "easy");
+					terminal.applySGR(Terminal.SGR.ENTER_BOLD);
 					putString(1, 5, terminal, newBoard.toString());
+					terminal.applySGR(Terminal.SGR.EXIT_BOLD);
 				}
+
 				if (key.getCharacter() == 'M') { //moving to the next position to the right and up one
 					newBoard = new Sudoku (mediumBoard, "medium");
+					terminal.applySGR(Terminal.SGR.ENTER_BOLD);
 					putString(1, 5, terminal, newBoard.toString());
+					terminal.applySGR(Terminal.SGR.EXIT_BOLD);
 				}
+
 				if (key.getCharacter() == 'H') { //moving to the next position to the right and up one
 					newBoard = new Sudoku (hardBoard, "hard");
+					terminal.applySGR(Terminal.SGR.ENTER_BOLD);
 					putString(1, 5, terminal, newBoard.toString());
+					terminal.applySGR(Terminal.SGR.EXIT_BOLD);
 				}
 
 

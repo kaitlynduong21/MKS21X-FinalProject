@@ -14,7 +14,7 @@ Development Log
 
 1/08: Kaitlyn worked on adding a clear, save, and retrieve saved board feature in the TerminalDemo file. The save method does not work completely yet because it is not saving to the correct locations so when you retrieve the saved board, the board is not what was saved. Sabrina is starting to work on the hint method.
 
-1/09: We both realized the save method isn't working properly and we had a collaborative effort on trying to fix how the code reads the Sudoku board and prints it out in the terminal. 
+1/09: We both realized the save method isn't working properly and we had a collaborative effort on trying to fix how the code reads the Sudoku board and prints it out in the terminal.
 
 1/10: Kaitlyn fixed the problem with saving and retrieving the board. After testing the driver multiple times, we realized the problem was not in the save method, but actually in the TerminalDemo file. The xcor and ycor of the char did not take into account the spaces between the board, so we have fixed that.
 
@@ -24,6 +24,8 @@ Development Log
 
 1/13: Kaitlyn fixed the hint feature in the TerminalDemo file, so it will work in the terminal. Sabrina tested the check and hint features altered the hint method in the Sudoku class. Sabrina also added a few more puzzles that will incorporate for different difficulty levels in the future.
 
-1/14: We changed the key symbols to work on the school computers (we programmed on a Mac). We also added retrieved saved board on the menu. 
+1/14: We changed the key symbols to work on the school computers (we programmed on a Mac). We also added retrieved saved board on the menu.
 
-1/15: We fixed backspace feature so it can't change the original numbers in the puzzle. 
+1/15: We fixed backspace feature so it can't change the original numbers in the puzzle. Sabrina began working on incorporating different difficulty levels.
+
+1/16: Kaitlyn added a refresh feature which will allow the user to generate a different seeded board. She also changed the Sudoku constructor so that different difficulties will show different amount of squares filled in– easy will show 30, medium will show 25, and hard will show 20.
