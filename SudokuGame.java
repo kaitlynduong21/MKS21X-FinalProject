@@ -1,4 +1,5 @@
-
+import java.io.*;
+import java.util.*;
 
 //API : http://mabe02.github.io/lanterna/apidocs/2.1/
 import com.googlecode.lanterna.terminal.Terminal.SGR;
@@ -72,7 +73,7 @@ public class SudokuGame{
 			{3, 4, 5, 2, 8, 6, 1, 7, 9},
 		};
 
-		int[][] easyBoard = new int[][]{
+		int[][] easyBoard1 = new int[][]{
 			{2, 9, 6, 3, 1, 8, 5, 7, 4},
 			{5, 8, 4, 9, 7, 2, 6, 1 ,3},
 			{7, 1, 3, 6, 4, 5, 2, 8, 9},
@@ -83,9 +84,26 @@ public class SudokuGame{
 			{8, 5, 9, 7, 6, 4, 1, 3, 2},
 			{3, 4, 2, 1, 8, 9, 7, 6, 5},
 		};
-		Sudoku newBoard = new Sudoku(easyBoard, "easy");
+		Sudoku newBoard = new Sudoku(easyBoard1, "easy");
+		int[][] easyBoard = new int [9][9];
 		if(args[0].trim().equals("easy")) {
-			 newBoard = new Sudoku(easyBoard, "easy");
+			try{
+				File f = new File("EasyBoards.txt");
+				Scanner in = new Scanner(f);
+				for(int a = 0; a < 9; a ++){
+					for(int b = 0; b < 9; b++){
+						String s = in.next();
+						if(s != " " && s != ","){
+							int num = Integer.parseInt(s);
+							easyBoard[a][b] = num;
+						}
+					}
+				}
+			 	newBoard = new Sudoku(easyBoard, "easy");
+		 } catch(FileNotFoundException e){
+			 System.out.println("Easy Board text file not found");
+			 System.exit(1);
+		 }
 		} else {
 			if(args[0].equals("medium")){
 				 newBoard = new Sudoku(mediumBoard, "medium");
