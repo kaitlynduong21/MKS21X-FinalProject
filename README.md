@@ -1,5 +1,9 @@
 # MKS21X-FinalProject
 
+Instructions on how to run the Sudoku code
+
+First, change terminal size to full screen. Then run and compile the SudokuGame.java file.
+
 Development Log
 
 1/03: We have created the Square class, but are struggling with merging branches. We also started the Sudoku.java file.
