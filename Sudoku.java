@@ -27,7 +27,7 @@ public class Sudoku{
     try{
     File file = new File("Puzzles.txt");
     Scanner in = new Scanner(file);
-    puzzleChoice = Math.abs(randgen.nextInt() % 2);
+    puzzleChoice = Math.abs(randgen.nextInt() % 5);
     for (int k = 0; k < puzzleChoice * 10 + 1; k++) {
       in.nextLine();
     }
