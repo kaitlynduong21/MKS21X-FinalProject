@@ -67,16 +67,15 @@ public class Sudoku{
       }
     }
     while (count > 0) {
-    for (int x = 0; x < nums.length; x ++ ) {
-      for (int y = 0; y < nums[0].length; y ++) {
-        rand = randgen.nextInt() % 2;
-        if (rand == 1 && puzzle[x][y] == '_') {
-          puzzle[x][y] = (char)(nums[x][y] + 48);
+      int xcor;
+      int ycor;
+        xcor = Math.abs(randgen.nextInt() % 9);
+        ycor = Math.abs(randgen.nextInt() % 9);
+        if (puzzle[xcor][ycor] == '_') {
+          puzzle[xcor][ycor] = (char)(nums[xcor][ycor] + 48);
           count--;
         }
       }
-    }
-  }
 
     savedBoard = new char[nums.length][nums[0].length];
     original = new char[nums.length][nums[0].length];
@@ -129,21 +128,17 @@ public class Sudoku{
       for (int y = 0; y < nums[0].length; y ++) {
         puzzle[x][y] = (char)95;
       }
-    }
-    int rand;
+}
     while (count > 0) {
-    for (int x = 0; x < nums.length; x ++ ) {
-      for (int y = 0; y < nums[0].length; y ++) {
-        rand = randgen.nextInt() % 2;
-        if (count > 0) {
-        if (rand == 1 && puzzle[x][y] == '_') {
-          puzzle[x][y] = (char)(nums[x][y] + 48);
+      int xcor;
+      int ycor;
+        xcor = Math.abs(randgen.nextInt() % 9);
+        ycor = Math.abs(randgen.nextInt() % 9);
+        if (puzzle[xcor][ycor] == '_') {
+          puzzle[xcor][ycor] = (char)(nums[xcor][ycor] + 48);
           count--;
         }
       }
-    }
-  }
-}
     savedBoard = new char[nums.length][nums[0].length];
     original = new char[nums.length][nums[0].length];
     for (int x = 0; x < nums.length; x ++ ) {
@@ -198,18 +193,15 @@ public class Sudoku{
       }
     }
     while (count > 0) {
-    for (int x = 0; x < nums.length; x ++ ) {
-      for (int y = 0; y < nums[0].length; y ++) {
-        rand = randgen.nextInt() % 2;
-        if (count > 0) {
-        if (rand == 1 && puzzle[x][y] == '_') {
-          puzzle[x][y] = (char)(nums[x][y] + 48);
+      int xcor;
+      int ycor;
+        xcor = Math.abs(randgen.nextInt() % 9);
+        ycor = Math.abs(randgen.nextInt() % 9);
+        if (puzzle[xcor][ycor] == '_') {
+          puzzle[xcor][ycor] = (char)(nums[xcor][ycor] + 48);
           count--;
         }
       }
-    }
-  }
-}
     savedBoard = new char[nums.length][nums[0].length];
     original = new char[nums.length][nums[0].length];
     for (int x = 0; x < nums.length; x ++ ) {
