@@ -50,7 +50,6 @@ public class Sudoku{
     puzzle = new char[nums.length][nums[0].length];
     savedBoard = new char[nums.length][nums[0].length];
     original = new char[nums.length][nums[0].length];
-    int rand;
     int count = 0;
     if(difficulty == "easy"){
       count = 30; //finding random positions to place the numbers on the board
@@ -67,16 +66,15 @@ public class Sudoku{
       }
     }
     while (count > 0) {
-    for (int x = 0; x < nums.length; x ++ ) {
-      for (int y = 0; y < nums[0].length; y ++) {
-        rand = randgen.nextInt() % 2;
-        if (rand == 1 && puzzle[x][y] == '_') {
-          puzzle[x][y] = (char)(nums[x][y] + 48);
+      int xcor;
+      int ycor;
+        xcor = Math.abs(randgen.nextInt() % 9);
+        ycor = Math.abs(randgen.nextInt() % 9);
+        if (puzzle[xcor][ycor] == '_') {
+          puzzle[xcor][ycor] = (char)(nums[xcor][ycor] + 48);
           count--;
         }
       }
-    }
-  }
 
     savedBoard = new char[nums.length][nums[0].length];
     original = new char[nums.length][nums[0].length];
@@ -87,6 +85,7 @@ public class Sudoku{
       }
     }
   }
+
   public Sudoku(String level, int choice){
     Random randSeed = new Random ();
     seed = Math.abs((randSeed.nextInt() % 10000));
@@ -129,21 +128,17 @@ public class Sudoku{
       for (int y = 0; y < nums[0].length; y ++) {
         puzzle[x][y] = (char)95;
       }
-    }
-    int rand;
+}
     while (count > 0) {
-    for (int x = 0; x < nums.length; x ++ ) {
-      for (int y = 0; y < nums[0].length; y ++) {
-        rand = randgen.nextInt() % 2;
-        if (count > 0) {
-        if (rand == 1 && puzzle[x][y] == '_') {
-          puzzle[x][y] = (char)(nums[x][y] + 48);
+      int xcor;
+      int ycor;
+        xcor = Math.abs(randgen.nextInt() % 9);
+        ycor = Math.abs(randgen.nextInt() % 9);
+        if (puzzle[xcor][ycor] == '_') {
+          puzzle[xcor][ycor] = (char)(nums[xcor][ycor] + 48);
           count--;
         }
       }
-    }
-  }
-}
     savedBoard = new char[nums.length][nums[0].length];
     original = new char[nums.length][nums[0].length];
     for (int x = 0; x < nums.length; x ++ ) {
@@ -154,11 +149,11 @@ public class Sudoku{
     }
   }
 
-  public Sudoku(String level, int seed1, int choice){
+  public Sudoku(String level, int choice, int seed1){
     randgen = new Random(seed1);
     seed = seed1;
-    int rand;
     nums = new int[9][9];
+    puzzleChoice = choice;
     try{
     File file = new File("Puzzles.txt");
     Scanner in = new Scanner(file);
@@ -198,18 +193,15 @@ public class Sudoku{
       }
     }
     while (count > 0) {
-    for (int x = 0; x < nums.length; x ++ ) {
-      for (int y = 0; y < nums[0].length; y ++) {
-        rand = randgen.nextInt() % 2;
-        if (count > 0) {
-        if (rand == 1 && puzzle[x][y] == '_') {
-          puzzle[x][y] = (char)(nums[x][y] + 48);
+      int xcor;
+      int ycor;
+        xcor = Math.abs(randgen.nextInt() % 9);
+        ycor = Math.abs(randgen.nextInt() % 9);
+        if (puzzle[xcor][ycor] == '_') {
+          puzzle[xcor][ycor] = (char)(nums[xcor][ycor] + 48);
           count--;
         }
       }
-    }
-  }
-}
     savedBoard = new char[nums.length][nums[0].length];
     original = new char[nums.length][nums[0].length];
     for (int x = 0; x < nums.length; x ++ ) {
@@ -240,7 +232,7 @@ public class Sudoku{
       }
       newstr+= "\n";
     }
-    return newstr += "Seed: " + seed;
+    return newstr += "Seed: " + seed + "\nPuzzle: " + puzzleChoice;
   }
 
   public String myBoard(){ //displays the last saved board

@@ -34,6 +34,10 @@ public class Driver{
     };
     Sudoku newBoard = new Sudoku("hard");
     System.out.println(newBoard);
+     newBoard = new Sudoku("hard", 0);
+    System.out.println(newBoard);
+     newBoard = new Sudoku("hard", 1, 3245);
+    System.out.println(newBoard);
     /*System.out.println(newBoard.getPuzzle(0,1));
     System.out.println(newBoard.originalBoard());
     newBoard.setPuzzle(1, 6, '9');
@@ -45,7 +49,7 @@ public class Driver{
       System.out.println("false");
     }
     System.out.println(args[0]);*/
-    System.out.println(newBoard.getKey());
+    //System.out.println(newBoard.getKey());
     /*newBoard.setPuzzle(1, 6, '9');
     newBoard.setPuzzle(3, 6, '7');
     System.out.println(newBoard);
