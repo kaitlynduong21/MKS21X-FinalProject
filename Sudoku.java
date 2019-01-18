@@ -50,7 +50,6 @@ public class Sudoku{
     puzzle = new char[nums.length][nums[0].length];
     savedBoard = new char[nums.length][nums[0].length];
     original = new char[nums.length][nums[0].length];
-    int rand;
     int count = 0;
     if(difficulty == "easy"){
       count = 30; //finding random positions to place the numbers on the board
@@ -86,6 +85,7 @@ public class Sudoku{
       }
     }
   }
+
   public Sudoku(String level, int choice){
     Random randSeed = new Random ();
     seed = Math.abs((randSeed.nextInt() % 10000));
@@ -149,11 +149,11 @@ public class Sudoku{
     }
   }
 
-  public Sudoku(String level, int seed1, int choice){
+  public Sudoku(String level, int choice, int seed1){
     randgen = new Random(seed1);
     seed = seed1;
-    int rand;
     nums = new int[9][9];
+    puzzleChoice = choice;
     try{
     File file = new File("Puzzles.txt");
     Scanner in = new Scanner(file);
@@ -232,7 +232,7 @@ public class Sudoku{
       }
       newstr+= "\n";
     }
-    return newstr += "Seed: " + seed;
+    return newstr += "Seed: " + seed + "\nPuzzle: " + puzzleChoice;
   }
 
   public String myBoard(){ //displays the last saved board
