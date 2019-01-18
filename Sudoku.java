@@ -17,6 +17,8 @@ public class Sudoku{
 
   private int[][] nums;
 
+  private int puzzleChoice;
+
   public Sudoku(String level){
     Random randSeed = new Random ();
     seed = Math.abs((randSeed.nextInt() % 10000));
@@ -25,8 +27,8 @@ public class Sudoku{
     try{
     File file = new File("Puzzles.txt");
     Scanner in = new Scanner(file);
-    int i = Math.abs(randgen.nextInt() % 2);
-    for (int k = 0; k < i * 10 + 1; k++) {
+    puzzleChoice = Math.abs(randgen.nextInt() % 2);
+    for (int k = 0; k < puzzleChoice * 10 + 1; k++) {
       in.nextLine();
     }
     for (int x = 0; x < 9; x ++ ) {
@@ -48,9 +50,6 @@ public class Sudoku{
     puzzle = new char[nums.length][nums[0].length];
     savedBoard = new char[nums.length][nums[0].length];
     original = new char[nums.length][nums[0].length];
-    /*Random randSeed = new Random ();
-    seed = Math.abs((randSeed.nextInt() % 10000));
-    randgen = new Random(seed);*/
     int rand;
     int count = 0;
     if(difficulty == "easy"){
@@ -71,7 +70,6 @@ public class Sudoku{
     for (int x = 0; x < nums.length; x ++ ) {
       for (int y = 0; y < nums[0].length; y ++) {
         rand = randgen.nextInt() % 2;
-        //if (count > 0) {
         if (rand == 1 && puzzle[x][y] == '_') {
           puzzle[x][y] = (char)(nums[x][y] + 48);
           count--;
@@ -89,8 +87,26 @@ public class Sudoku{
       }
     }
   }
-
-  public Sudoku(int[][] nums, String level, int seed1){
+  public Sudoku(String level, int choice){
+    Random randSeed = new Random ();
+    seed = Math.abs((randSeed.nextInt() % 10000));
+    randgen = new Random(seed);
+    nums = new int[9][9];
+    try{
+    File file = new File("Puzzles.txt");
+    Scanner in = new Scanner(file);
+    for (int k = 0; k < choice * 10 + 1; k++) {
+      in.nextLine();
+    }
+    for (int x = 0; x < 9; x ++ ) {
+      for (int y = 0; y < 9; y ++) {
+        nums[x][y] = in.nextInt(); //copying over char values to answer
+    }
+  }
+  } catch (FileNotFoundException e) {
+  System.out.println("File not found");
+  System.exit(1);
+}
     difficulty = level;
     answer = new char[nums.length][nums[0].length];
     for (int x = 0; x < nums.length; x ++ ) {
@@ -99,9 +115,73 @@ public class Sudoku{
       }
     }
     puzzle = new char[nums.length][nums[0].length];
+    int count = 0;
+    if(difficulty == "easy"){
+      count = 30; //finding random positions to place the numbers on the board
+    }
+    if(difficulty == "medium"){
+      count = 25;
+    }
+    if(difficulty == "hard"){
+      count = 20;
+    }
+    for (int x = 0; x < nums.length; x ++ ) {
+      for (int y = 0; y < nums[0].length; y ++) {
+        puzzle[x][y] = (char)95;
+      }
+    }
+    int rand;
+    while (count > 0) {
+    for (int x = 0; x < nums.length; x ++ ) {
+      for (int y = 0; y < nums[0].length; y ++) {
+        rand = randgen.nextInt() % 2;
+        if (count > 0) {
+        if (rand == 1 && puzzle[x][y] == '_') {
+          puzzle[x][y] = (char)(nums[x][y] + 48);
+          count--;
+        }
+      }
+    }
+  }
+}
+    savedBoard = new char[nums.length][nums[0].length];
+    original = new char[nums.length][nums[0].length];
+    for (int x = 0; x < nums.length; x ++ ) {
+      for (int y = 0; y < nums[0].length; y ++) {
+        savedBoard[x][y] = puzzle[x][y];
+        original[x][y] = puzzle[x][y];
+      }
+    }
+  }
+
+  public Sudoku(String level, int seed1, int choice){
     randgen = new Random(seed1);
     seed = seed1;
     int rand;
+    nums = new int[9][9];
+    try{
+    File file = new File("Puzzles.txt");
+    Scanner in = new Scanner(file);
+    for (int k = 0; k < choice * 10 + 1; k++) {
+      in.nextLine();
+    }
+    for (int x = 0; x < 9; x ++ ) {
+      for (int y = 0; y < 9; y ++) {
+        nums[x][y] = in.nextInt(); //copying over char values to answer
+    }
+  }
+  } catch (FileNotFoundException e) {
+  System.out.println("File not found");
+  System.exit(1);
+}
+    difficulty = level;
+    answer = new char[nums.length][nums[0].length];
+    for (int x = 0; x < nums.length; x ++ ) {
+      for (int y = 0; y < nums[0].length; y ++) {
+        answer[x][y] = (char)(nums[x][y] + 48);
+      }
+    }
+    puzzle = new char[nums.length][nums[0].length];
     int count = 0;
     if(difficulty == "easy"){
       count = 30; //finding random positions to place the numbers on the board
@@ -138,6 +218,10 @@ public class Sudoku{
         original[x][y] = puzzle[x][y];
       }
     }
+  }
+
+  public int getPuzzleChoice() {
+    return puzzleChoice;
   }
 
   public String toString(){ //prints the board currently working on
