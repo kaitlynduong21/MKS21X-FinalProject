@@ -28,4 +28,6 @@ Development Log
 
 1/15: We fixed backspace feature so it can't change the original numbers in the puzzle. Sabrina began working on incorporating different difficulty levels.
 
-1/16: Kaitlyn added a refresh feature which will allow the user to generate a different seeded board. She also changed the Sudoku constructor so that different difficulties will show different amount of squares filled in– easy will show 30, medium will show 25, and hard will show 20.
+1/16: Sabrina added new puzzles into the "puzzles.txt" file. Kaitlyn added a refresh feature which will allow the user to generate a different seeded board. She also changed the Sudoku constructor so that different difficulties will show different amount of squares filled in– easy will show 30, medium will show 25, and hard will show 20.
+
+1/17: Kaitlyn changed the constructors to take in either a difficulty, a difficulty and a puzzle choice, or a difficulty, puzzle choice, and a seed. The puzzles.txt file will contain various puzzles and the first constructor will randomly select one of those puzzles and using the scanner, extract the numbers of the file into a 2d int array. We added two more private fields, an 2d int array nums and an int which is the puzzle choice (corresponds with the puzzle number in the text file). We also altered the features in the main function to take these changes into consideration.
