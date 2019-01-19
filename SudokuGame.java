@@ -136,11 +136,17 @@ public class SudokuGame{
 			if (key != null)
 			{
 
-				if (key.getKind() == Key.Kind.Escape) { //exiting the board
-
+				/*if (key.getKind() == Key.Kind.Escape) { //exiting the board
+					terminal.clearScreen();
 					terminal.exitPrivateMode();
+					terminal.clearScreen();
+					if (newBoard.check()) {
+						System.out.println("CONGRATULATIONS! You finished with a time of " + lastSecond + " seconds!");
+					} else {
+						System.out.println("Wow you spent " + lastSecond + " seconds and you still failed.");
+					}
 					running = false;
-				}
+				}*/
 
 				if (key.getKind() == Key.Kind.ArrowLeft) { //cursor moving to the left
 					//erminal.moveCursor(x,y);
@@ -351,14 +357,13 @@ public class SudokuGame{
 					putString(1, 20, terminal, newBoard.getKey());
 				}
 
-
-
-
 				putString(1,4,terminal,"["+key.getCharacter() +"]");
 				putString(1,1,terminal,key+"        ");//to clear leftover letters pad withspaces
-			}
 
-			terminal.applyForegroundColor(Terminal.Color.DEFAULT);
+				if (key.getKind() == Key.Kind.Escape) { //exiting the board
+					running = false;
+				}
+			}
 
 			//DO EVEN WHEN NO KEY PRESSED:
 			long tEnd = System.currentTimeMillis();
@@ -368,8 +373,8 @@ public class SudokuGame{
 				lastSecond = millis / 1000;
 				//one second has passed.
 				putString(1,3,terminal,"Seconds since start of program: "+lastSecond);
-
 			}
+			
 			putString(25, 11, terminal, "Save: s ");
 			putString(25, 12, terminal, "Reset: r");
 			putString(25, 13, terminal, "Hint: h ");
@@ -378,6 +383,15 @@ public class SudokuGame{
 			putString(25, 16, terminal, "Get New Board: n");
 			putString(25, 17, terminal, "Want answer?: q");
 			putString(25, 18, terminal, "Give up?: esc");
+
+			if (key != null && key.getKind() == Key.Kind.Escape) {
+				terminal.exitPrivateMode();
+				if (newBoard.check()) {
+					System.out.println("CONGRATULATIONS! You finished with a time of " + lastSecond + " seconds!");
+				} else {
+					System.out.println("Wow you spent " + lastSecond + " seconds and you still failed.");
+				}
+			}
 		}
 	}
 }
