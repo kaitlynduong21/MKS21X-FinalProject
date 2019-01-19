@@ -41,15 +41,15 @@ public class Sudoku{
   System.exit(1);
 }
     difficulty = level;
-    answer = new char[nums.length][nums[0].length];
-    for (int x = 0; x < nums.length; x ++ ) {
-      for (int y = 0; y < nums[0].length; y ++) {
+    answer = new char[9][9];
+    for (int x = 0; x < 9; x ++ ) {
+      for (int y = 0; y < 9; y ++) {
         answer[x][y] = (char)(nums[x][y] + 48); //copying over char values to answer
       }
     }
-    puzzle = new char[nums.length][nums[0].length];
-    savedBoard = new char[nums.length][nums[0].length];
-    original = new char[nums.length][nums[0].length];
+    puzzle = new char[9][9];
+    savedBoard = new char[9][9];
+    original = new char[9][9];
     int count = 0;
     if(difficulty == "easy"){
       count = 30; //finding random positions to place the numbers on the board
@@ -60,8 +60,8 @@ public class Sudoku{
     if(difficulty == "hard"){
       count = 20;
     }
-    for (int x = 0; x < nums.length; x ++ ) {
-      for (int y = 0; y < nums[0].length; y ++) {
+    for (int x = 0; x < 9; x ++ ) {
+      for (int y = 0; y < 9; y ++) {
         puzzle[x][y] = (char)95;
       }
     }
@@ -76,10 +76,10 @@ public class Sudoku{
         }
       }
 
-    savedBoard = new char[nums.length][nums[0].length];
-    original = new char[nums.length][nums[0].length];
-    for (int x = 0; x < nums.length; x ++ ) {
-      for (int y = 0; y < nums[0].length; y ++) {
+    savedBoard = new char[9][9];
+    original = new char[9][9];
+    for (int x = 0; x < 9; x ++ ) {
+      for (int y = 0; y < 9; y ++) {
         savedBoard[x][y] = puzzle[x][y];
         original[x][y] = puzzle[x][y];
       }
@@ -107,13 +107,13 @@ public class Sudoku{
   System.exit(1);
 }
     difficulty = level;
-    answer = new char[nums.length][nums[0].length];
-    for (int x = 0; x < nums.length; x ++ ) {
-      for (int y = 0; y < nums[0].length; y ++) {
+    answer = new char[9][9];
+    for (int x = 0; x < 9; x ++ ) {
+      for (int y = 0; y < 9; y ++) {
         answer[x][y] = (char)(nums[x][y] + 48);
       }
     }
-    puzzle = new char[nums.length][nums[0].length];
+    puzzle = new char[9][9];
     int count = 0;
     if(difficulty == "easy"){
       count = 30; //finding random positions to place the numbers on the board
@@ -124,8 +124,8 @@ public class Sudoku{
     if(difficulty == "hard"){
       count = 20;
     }
-    for (int x = 0; x < nums.length; x ++ ) {
-      for (int y = 0; y < nums[0].length; y ++) {
+    for (int x = 0; x < 9; x ++ ) {
+      for (int y = 0; y < 9; y ++) {
         puzzle[x][y] = (char)95;
       }
 }
@@ -139,10 +139,10 @@ public class Sudoku{
           count--;
         }
       }
-    savedBoard = new char[nums.length][nums[0].length];
-    original = new char[nums.length][nums[0].length];
-    for (int x = 0; x < nums.length; x ++ ) {
-      for (int y = 0; y < nums[0].length; y ++) {
+    savedBoard = new char[9][9];
+    original = new char[9][9];
+    for (int x = 0; x < 9; x ++ ) {
+      for (int y = 0; y < 9; y ++) {
         savedBoard[x][y] = puzzle[x][y];
         original[x][y] = puzzle[x][y];
       }
@@ -170,13 +170,13 @@ public class Sudoku{
   System.exit(1);
 }
     difficulty = level;
-    answer = new char[nums.length][nums[0].length];
-    for (int x = 0; x < nums.length; x ++ ) {
-      for (int y = 0; y < nums[0].length; y ++) {
+    answer = new char[9][9];
+    for (int x = 0; x < 9; x ++ ) {
+      for (int y = 0; y < 9; y ++) {
         answer[x][y] = (char)(nums[x][y] + 48);
       }
     }
-    puzzle = new char[nums.length][nums[0].length];
+    puzzle = new char[9][9];
     int count = 0;
     if(difficulty == "easy"){
       count = 30; //finding random positions to place the numbers on the board
@@ -187,8 +187,8 @@ public class Sudoku{
     if(difficulty == "hard"){
       count = 20;
     }
-    for (int x = 0; x < nums.length; x ++ ) {
-      for (int y = 0; y < nums[0].length; y ++) {
+    for (int x = 0; x < 9; x ++ ) {
+      for (int y = 0; y < 9; y ++) {
         puzzle[x][y] = (char)95;
       }
     }
@@ -202,10 +202,10 @@ public class Sudoku{
           count--;
         }
       }
-    savedBoard = new char[nums.length][nums[0].length];
-    original = new char[nums.length][nums[0].length];
-    for (int x = 0; x < nums.length; x ++ ) {
-      for (int y = 0; y < nums[0].length; y ++) {
+    savedBoard = new char[9][9];
+    original = new char[9][9];
+    for (int x = 0; x < 9; x ++ ) {
+      for (int y = 0; y < 9; y ++) {
         savedBoard[x][y] = puzzle[x][y];
         original[x][y] = puzzle[x][y];
       }

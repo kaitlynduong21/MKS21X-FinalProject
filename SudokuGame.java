@@ -29,12 +29,9 @@ public class SudokuGame{
 	public static void main(String[] args) {
 		String difficulty = "";
 		if(args.length < 1){
-			System.out.println("Enter in a difficulty level: easy, medium, hard");
+			System.out.println("Enter in a difficulty level: easy, medium, hard.\n If you want add a choice of puzzle (number from 0- 5).\n You can add a seed as well (number from 0-10000).");
 			System.exit(1);
 		}
-		/*else{
-			args[0] = difficulty;
-		}*/
 
 		int x = 1;
 		int y = 7;
@@ -49,8 +46,9 @@ public class SudokuGame{
 
 		long tStart = System.currentTimeMillis();
 		long lastSecond = 0;
+
 		Sudoku newBoard = new Sudoku("easy");
-		if(args[0].trim().equals("easy")) {
+		if(args[0].equals("easy")) {
 			 newBoard = new Sudoku("easy");
 		} else {
 			if(args[0].equals("medium")){
@@ -60,22 +58,29 @@ public class SudokuGame{
 			}
 		}
 
-		/*if(args[0].equals("easy") && args.length == 2){
-				newBoard = new Sudoku(easyBoard, Integer.parseInt(args[1]));
-			}
-		if(args[0].equals("medium")){
-			newBoard = new Sudoku(mediumBoard, "medium");
-			if (args.length == 2) {
-				newBoard = new Sudoku(mediumBoard, Integer.parseInt(args[1]));
-			}
+		if (args.length == 2) {
+			if(args[0].equals("easy")) {
+				 newBoard = new Sudoku("easy", Integer.parseInt(args[1]));
+			} else {
+				if(args[0].equals("medium")){
+					 newBoard = new Sudoku("medium", Integer.parseInt(args[1]));
+				} else {
+						 newBoard = new Sudoku("hard", Integer.parseInt(args[1]));
 		}
+	}
+}
 
-		if(args[0].equals("hard")){
-			newBoard = new Sudoku(hardBoard, "hard");
-			if (args.length == 2) {
-				newBoard = new Sudoku(hardBoard, Integer.parseInt(args[1]));
-			}
-		}*/
+		if (args.length == 3) {
+			if(args[0].equals("easy")) {
+				 newBoard = new Sudoku("easy", Integer.parseInt(args[1]), Integer.parseInt(args[2]));
+			} else {
+				if(args[0].equals("medium")){
+					 newBoard = new Sudoku("medium", Integer.parseInt(args[1]), Integer.parseInt(args[2]));
+				} else {
+						 newBoard = new Sudoku("hard", Integer.parseInt(args[1]), Integer.parseInt(args[2]));
+		}
+	}
+}
 
 		terminal.applySGR(Terminal.SGR.ENTER_BOLD); //have the board printed to be bolded
 		putString(1, 5, terminal, newBoard.toString()); //printing the board into the terminal
@@ -106,10 +111,10 @@ public class SudokuGame{
 			}
 
 			if(xcor >=0 && xcor < 9 && ycor >= 0 && ycor < 9 && newBoard.getOriginal(xcor, ycor) == '_') {
-				putString(25, 7, terminal, "                                                               ");
+				putString(25, 7, terminal, "                                                            ");
 			} else {
 				if (y == 10 || y == 14 || y >= 18 || y < 7 || x == 7 || x == 15 || x >= 23 || x < 0) {
-					putString(25, 7, terminal, "                                                               ");
+					putString(25, 7, terminal, "                                                          ");
 				} else {
 					putString(25, 7, terminal, "This is part of the original puzzle. You cannot change it.");
 				}
@@ -174,8 +179,8 @@ public class SudokuGame{
 
 				if (key.getKind() == Key.Kind.ArrowUp) { //cursor moving up
 					if (ycor != 0) {
-					//terminal.applyForegroundColor(Terminal.Color.BLUE);
 					terminal.moveCursor(x,y);
+					//terminal.applyForegroundColor(Terminal.Color.BLUE);
 					y--;
 					if (y == 10) {
 						y --;
@@ -246,8 +251,8 @@ public class SudokuGame{
 				}
 			}
 
-				if (key.getCharacter() == 'c') {
-					putString(25, 10, terminal, "Are you sure you want to clear the board? Select shift + 2 if yes.           ");
+				if (key.getCharacter() == 'r') {
+					putString(25, 10, terminal, "Are you sure you want to reset the board? Select shift + 2 if yes.     ");
 				}
 
 				if (key.getCharacter() == '@') {
@@ -256,12 +261,12 @@ public class SudokuGame{
 					terminal.applySGR(Terminal.SGR.ENTER_BOLD);
 					putString(1, 5, terminal, newBoard.toString());
 					terminal.applySGR(Terminal.SGR.EXIT_BOLD);
-					putString(25, 10, terminal, "Board refreshed                                                                 ");
+					putString(25, 10, terminal, "Board refreshed                                                        ");
 				}
 
 				if (key.getCharacter() == 's') { //user can save the board
 					newBoard.save();
-					putString(25, 10, terminal, "Saved Successful!                                                               ");
+					putString(25, 10, terminal, "Saved Successful!                                                      ");
 				}
 
 				if (key.getCharacter() == 'r') { //user can replace current board with the board last saved
@@ -305,7 +310,7 @@ public class SudokuGame{
 					}
 				}
 
-				if (key.getCharacter() == 'e') {
+				if (key.getCharacter() == 'c') {
 					if (newBoard.check()){
 						putString (1, 5, terminal, "CONGRATULATIONS! YOU ARE FINISHED!");
 					} else {
@@ -338,6 +343,15 @@ public class SudokuGame{
 					terminal.applySGR(Terminal.SGR.EXIT_BOLD);
 				}
 
+				if (key.getCharacter() == 'q') {
+					putString(25, 10, terminal, "Are you sure you want the answer? If yes, select 'Q'");
+				}
+
+				if (key.getCharacter() == 'Q') {
+					putString(1, 20, terminal, newBoard.getKey());
+				}
+
+
 
 
 				putString(1,4,terminal,"["+key.getCharacter() +"]");
@@ -356,13 +370,14 @@ public class SudokuGame{
 				putString(1,3,terminal,"Seconds since start of program: "+lastSecond);
 
 			}
-			putString(25, 12, terminal, "Save: s ");
-			putString(25, 13, terminal, "Clear: c");
-			putString(25, 14, terminal, "Hint: h ");
-			putString(25, 15, terminal, "Check: e");
-			putString(25, 16, terminal, "Get Saved Board: r");
-			putString(25, 17, terminal, "Get New Board: n");
-
+			putString(25, 11, terminal, "Save: s ");
+			putString(25, 12, terminal, "Reset: r");
+			putString(25, 13, terminal, "Hint: h ");
+			putString(25, 14, terminal, "Check: c");
+			putString(25, 15, terminal, "Get Saved Board: r");
+			putString(25, 16, terminal, "Get New Board: n");
+			putString(25, 17, terminal, "Want answer?: q");
+			putString(25, 18, terminal, "Give up?: esc");
 		}
 	}
 }
