@@ -202,7 +202,6 @@ public class SudokuGame{
 
 				if (key.getKind() == Key.Kind.ArrowDown) { //cursor moving down
 					if (ycor != 8) {
-					//terminal.applyForegroundColor(Terminal.Color.BLUE);
 					terminal.moveCursor(x,y);
 					y++;
 
@@ -374,7 +373,7 @@ public class SudokuGame{
 				//one second has passed.
 				putString(1,3,terminal,"Seconds since start of program: "+lastSecond);
 			}
-			
+
 			putString(25, 11, terminal, "Save: s ");
 			putString(25, 12, terminal, "Reset: r");
 			putString(25, 13, terminal, "Hint: h ");
