@@ -218,8 +218,8 @@ public class Sudoku{
 
   public String toString(){ //prints the board currently working on
     String newstr = "\nPuzzle: \n";
-    for (int x = 0; x < puzzle.length; x ++ ) {
-      for (int y = 0; y < puzzle[0].length; y ++) {
+    for (int x = 0; x < 9; x ++ ) {
+      for (int y = 0; y < 9; y ++) {
         if(y % 3 == 2){
           newstr += "|" + puzzle[x][y] + "| "; //positioning the numbers in a sudoku board to make 9 3x3 boards
         }
@@ -232,13 +232,13 @@ public class Sudoku{
       }
       newstr+= "\n";
     }
-    return newstr += "Seed: " + seed + "\nPuzzle: " + puzzleChoice;
+    return newstr += "Seed: " + seed + "\nPuzzle: " + puzzleChoice + "\nDifficulty: " + difficulty;
   }
 
   public String myBoard(){ //displays the last saved board
     String newstr = "\nLast saved board: \n";
-    for (int x = 0; x < savedBoard.length; x ++ ) {
-      for (int y = 0; y < savedBoard[0].length; y ++) {
+    for (int x = 0; x < 9; x ++ ) {
+      for (int y = 0; y < 9; y ++) {
         if(y % 3 == 2){
           newstr += "|" + savedBoard[x][y] + "| ";
         }
@@ -256,8 +256,8 @@ public class Sudoku{
 
   public String originalBoard(){ //displays the last saved board
     String newstr = "\nOriginal board: \n";
-    for (int x = 0; x < original.length; x ++ ) {
-      for (int y = 0; y < original[0].length; y ++) {
+    for (int x = 0; x < 9; x ++ ) {
+      for (int y = 0; y < 9; y ++) {
         if(y % 3 == 2){
           newstr += "|" + original[x][y] + "| ";
         }
@@ -275,8 +275,8 @@ public class Sudoku{
 
   public String getKey(){ //displays the answer key
     String newstr = "\nKey: \n";
-    for (int x = 0; x < answer.length; x ++ ) {
-      for (int y = 0; y < answer[0].length; y ++) {
+    for (int x = 0; x < 9; x ++ ) {
+      for (int y = 0; y < 9; y ++) {
         if(y % 3 == 2){
           newstr += "|" + answer[x][y] + "| ";
         }
@@ -305,8 +305,8 @@ public class Sudoku{
   }
 
   public void reset() {
-    for (int x = 0; x < original.length; x ++ ) {
-      for (int y = 0; y < original[0].length; y ++) {
+    for (int x = 0; x < 9; x ++ ) {
+      for (int y = 0; y < 9; y ++) {
         puzzle[x][y] = original[x][y];
       }
     }
@@ -316,35 +316,24 @@ public class Sudoku{
     return puzzle[y][x];
   }
 
+  public char getAnswer(int x, int y){
+    return answer[y][x];
+  }
+
+  public String getDifficulty(){
+    return difficulty;
+  }
+
   public void setPuzzle(int y, int x, char num) { //changing the values in the sudoku board at a specific position
     puzzle[x][y] = num;
   }
 
   public void save() {
-    for (int x = 0; x < puzzle.length; x ++ ) {
-      for (int y = 0; y < puzzle[0].length; y ++) {
+    for (int x = 0; x < 9; x ++ ) {
+      for (int y = 0; y < 9; y ++) {
           savedBoard[x][y] = puzzle[x][y]; //copies over values from the puzzle to the savedBoard array
         }
       }
-    try{
-    File file = new File("savedBoard.txt");
-    if(!file.exists()){
-      file.createNewFile(); //creates the text file savedBoard if not existent already
-    }
-
-    FileWriter writer = new FileWriter(file);
-    BufferedWriter board = new BufferedWriter(writer);
-    for(int x = 0; x < savedBoard.length; x++){
-      for(int y = 0; y < savedBoard[0].length; y++){
-        board.write(savedBoard[x][y]); //enters values of the savedBoard into the text file
-      }
-      board.write("\n");
-    }
-    board.close();
-    //System.out.println("Saved Successful!");
-  } catch (IOException exception){
-    exception.printStackTrace();
-  }
   }
 
   public void hint(){
@@ -364,14 +353,19 @@ public class Sudoku{
   }
 
   public boolean check() {
-    for (int x = 0; x < puzzle.length; x++) {
-      for (int y = 0; y < puzzle[0].length; y ++) {
+    boolean a = true;
+    for (int x = 0; x < 9; x++) {
+      for (int y = 0; y < 9; y ++) {
         if (puzzle[x][y] != answer[x][y]) {
-          return false;
+          if (difficulty.equals("easy")) {
+            puzzle[x][y] = '_';
+            a = false;
+          } else {
+            a = false;
+          }
         }
       }
     }
-    return true;
+    return a;
   }
-
 }

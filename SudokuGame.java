@@ -274,7 +274,7 @@ public class SudokuGame{
 					putString(25, 10, terminal, "Saved Successful!                                                      ");
 				}
 
-				if (key.getCharacter() == 'r') { //user can replace current board with the board last saved
+				if (key.getCharacter() == 'g') { //user can replace current board with the board last saved
 					putString(25, 10, terminal, "Do you want to retrieve your last saved board? Select shift + 4 if yes.");
 				}
 
@@ -317,9 +317,25 @@ public class SudokuGame{
 
 				if (key.getCharacter() == 'c') {
 					if (newBoard.check()){
-						putString (1, 5, terminal, "CONGRATULATIONS! YOU ARE FINISHED!");
+						putString (1, 5, terminal, "CONGRATULATIONS! YOU ARE FINISHED!                       ");
 					} else {
 						putString (1, 5, terminal, "Incorrect:( Try again.             ");
+						if (newBoard.getDifficulty().equals("easy")) {
+							terminal.applySGR(Terminal.SGR.ENTER_BOLD);
+							putString(1, 5, terminal, newBoard.toString());
+							terminal.applySGR(Terminal.SGR.EXIT_BOLD);
+						}
+						if (newBoard.getDifficulty().equals("medium")) {
+							int count = 0;
+							for (int xnum = 0; xnum < 9; xnum++) {
+								for (int ynum = 0; ynum < 9; ynum ++) {
+									if (newBoard.getPuzzle(xnum, ynum) != newBoard.getAnswer(xnum, ynum)) {
+										count ++;
+									}
+								}
+							}
+							putString(23, 5, terminal, " You have " + count + " squares incorrect.");
+						}
 					}
 				}
 
@@ -378,7 +394,7 @@ public class SudokuGame{
 			putString(25, 12, terminal, "Reset: r");
 			putString(25, 13, terminal, "Hint: h ");
 			putString(25, 14, terminal, "Check: c");
-			putString(25, 15, terminal, "Get Saved Board: r");
+			putString(25, 15, terminal, "Get Saved Board: g");
 			putString(25, 16, terminal, "Get New Board: n");
 			putString(25, 17, terminal, "Want answer?: q");
 			putString(25, 18, terminal, "Give up?: esc");
