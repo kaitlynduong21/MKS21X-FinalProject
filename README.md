@@ -46,3 +46,5 @@ How to navigate:
 1/18: Sabrina added more puzzles and changed the constructor to account for the new number of puzzles. Kaitlyn changed the constructor to make them more concise.
 
 1/19: Kaitlyn altered the main function so that it can take in puzzle choice and seeds.
+
+1/20:1/19: Kaitlyn added a home screen that displays the rules and information about the difficulties. She also altered the check function to adjust it for different difficulties.
