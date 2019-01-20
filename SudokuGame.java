@@ -41,11 +41,8 @@ public class SudokuGame{
 
 		TerminalSize size = terminal.getTerminalSize();
 		terminal.setCursorVisible(false);
-
 		boolean running = true;
-
-		long tStart = System.currentTimeMillis();
-		long lastSecond = 0;
+		putString(0, 0, terminal, "Welcome to Kaitlyn and Sabrina's game of Sudoku!\nThe rules are simple: fill in each square with a number from 1-9.\nA completed and correct Sudoku puzzle will contain the integers 1-9 in each row, each column, and each 3 by 3 section, exactly once.\nAre you ready for a challenge? You have selected " + args[0] + "as your difficulty.\nEasy will mean 30 randomly selected squares will be filled in when you start. When you check your answer, the puzzle will take away all the squares that are wrongly filled.\nMedium will randomly fill in 25 squares. When you check you answers, we will tell you how many you have incorrect but not which ones are incorrect.\nUp for a challenge? Hard will randomly fill in 20 squares and you will only be able to know if the puzzle is correct or not.\nIf you want to change your difficulty, you may do so once you begin by clicking 'n' and 'E', 'M', or 'H'.\nWhen you are ready to begin, select enter and your time will start!\nGood luck!");
 
 		Sudoku newBoard = new Sudoku("easy");
 		if(args[0].equals("easy")) {
@@ -82,10 +79,22 @@ public class SudokuGame{
 	}
 }
 
-		terminal.applySGR(Terminal.SGR.ENTER_BOLD); //have the board printed to be bolded
-		putString(1, 5, terminal, newBoard.toString()); //printing the board into the terminal
+long tStart = 0;
+long lastSecond = 0;
+
 
 		while(running){
+			boolean start = false;
+			Key key = terminal.readInput();
+			if (key!= null && key.getKind() == Key.Kind.Enter) {
+				start = true;
+				terminal.clearScreen();
+					terminal.applySGR(Terminal.SGR.ENTER_BOLD); //have the board printed to be bolded
+					putString(1, 5, terminal, newBoard.toString()); //printing the board into the terminal
+					tStart = System.currentTimeMillis();
+				}
+
+				while (start) {
 
 			terminal.moveCursor(x,y);
 			terminal.applyBackgroundColor(Terminal.Color.WHITE);
@@ -130,23 +139,11 @@ public class SudokuGame{
 				str += ".";
 				putString(25 , 8, terminal, str);
 
-			Key key = terminal.readInput();
+			key = terminal.readInput();
 
 
 			if (key != null)
 			{
-
-				/*if (key.getKind() == Key.Kind.Escape) { //exiting the board
-					terminal.clearScreen();
-					terminal.exitPrivateMode();
-					terminal.clearScreen();
-					if (newBoard.check()) {
-						System.out.println("CONGRATULATIONS! You finished with a time of " + lastSecond + " seconds!");
-					} else {
-						System.out.println("Wow you spent " + lastSecond + " seconds and you still failed.");
-					}
-					running = false;
-				}*/
 
 				if (key.getKind() == Key.Kind.ArrowLeft) { //cursor moving to the left
 					//erminal.moveCursor(x,y);
@@ -400,12 +397,15 @@ public class SudokuGame{
 			putString(25, 18, terminal, "Give up?: esc");
 
 			if (key != null && key.getKind() == Key.Kind.Escape) {
+				start = false;
+				running = false;
 				terminal.exitPrivateMode();
 				if (newBoard.check()) {
 					System.out.println("CONGRATULATIONS! You finished with a time of " + lastSecond + " seconds!");
 				} else {
 					System.out.println("Wow you spent " + lastSecond + " seconds and you still failed.");
 				}
+			}
 			}
 		}
 	}
