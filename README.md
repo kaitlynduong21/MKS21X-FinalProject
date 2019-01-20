@@ -1,10 +1,17 @@
-# MKS21X-FinalProject
+# Instructions
 
-Instructions on how to run the Sudoku code
+How to play: 
+The goal of the game is to fill out the entire 9 by 9 puzzle in which each row, each column, and each 3 by 3 section, only contains the numbers 1 through 9 once. If you complete the board and your solution matches our solution, you win!
 
-First, change terminal size to full screen. Then run and compile the SudokuGame.java file.
+How to navigate: 
 
-Development Log
+1. Change the terminal size to full screen. 
+2. Compile the SudokuGame.java file (javac -cp lanterna.jar:. SudokuGame.java)
+3. Run the SudokuGame.java file (java -cp lanterna.jar:. SudokuGame). You will be prompted to add one, two, or three arguments. The first argument has to be either "easy", "medium", or "hard", depending on what difficulty you want. The other two arguments are optional. You can add a second argument which is the choice of puzzle (the complete lists of puzzles is in the puzzles.txt file). You can add a third argument which is the seed of the puzzle, so you can recreate the same puzzle later.
+4. When you enter the game, you start at the first upper left square. You can use the arrow buttons to navigate around the board. On the side of the board will be options that you can choose while playing; if you want to win quickly, we suggest clicking hint until the board is filled up.
+5. When you want to finish the game, click escape.
+
+# Development Log
 
 1/03: We have created the Square class, but are struggling with merging branches. We also started the Sudoku.java file.
 
@@ -37,3 +44,5 @@ Development Log
 1/17: Kaitlyn changed the constructors to take in either a difficulty, a difficulty and a puzzle choice, or a difficulty, puzzle choice, and a seed. The puzzles.txt file will contain various puzzles and the first constructor will randomly select one of those puzzles and using the scanner, extract the numbers of the file into a 2d int array. We added two more private fields, an 2d int array nums and an int which is the puzzle choice (corresponds with the puzzle number in the text file). We also altered the features in the main function to take these changes into consideration.
 
 1/18: Sabrina added more puzzles and changed the constructor to account for the new number of puzzles. Kaitlyn changed the constructor to make them more concise.
+
+1/19: Kaitlyn altered the main function so that it can take in puzzle choice and seeds.
