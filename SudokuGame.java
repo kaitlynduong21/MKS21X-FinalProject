@@ -28,7 +28,7 @@ public class SudokuGame{
 	}
 	public static void main(String[] args) {
 		String difficulty = "";
-		if(args.length < 1){
+		if(args.length < 1){ // if there is no inputted level, tell the user to enter one
 			System.out.println("Enter in a difficulty level: easy, medium, hard.\n If you want add a choice of puzzle (number from 0- 5).\n You can add a seed as well (number from 0-10000).");
 			System.exit(1);
 		}
@@ -41,11 +41,11 @@ public class SudokuGame{
 
 		TerminalSize size = terminal.getTerminalSize();
 		terminal.setCursorVisible(false);
-		boolean running = true;
-		putString(0, 0, terminal, "Welcome to Kaitlyn and Sabrina's game of Sudoku!\nThe rules are simple: fill in each square with a number from 1-9.\nA completed and correct Sudoku puzzle will contain the integers 1-9 in each row, each column, and each 3 by 3 section, exactly once.\nAre you ready for a challenge? You have selected " + args[0] + "as your difficulty.\nEasy will mean 30 randomly selected squares will be filled in when you start. When you check your answer, the puzzle will take away all the squares that are wrongly filled.\nMedium will randomly fill in 25 squares. When you check you answers, we will tell you how many you have incorrect but not which ones are incorrect.\nUp for a challenge? Hard will randomly fill in 20 squares and you will only be able to know if the puzzle is correct or not.\nIf you want to change your difficulty, you may do so once you begin by clicking 'n' and 'E', 'M', or 'H'.\nWhen you are ready to begin, select enter and your time will start!\nGood luck!");
+		boolean running = true; //below is the homescreen and shows the instructions and describes how the game will work
+		putString(0, 0, terminal, "Welcome to Kaitlyn and Sabrina's game of Sudoku!\nThe rules are simple: fill in each square with a number from 1-9.\nA completed and correct Sudoku puzzle will contain the integers 1-9 in each row, each column, and each 3 by 3 section, exactly once.\nAre you ready for a challenge? You have selected " + args[0] + "as your difficulty.\nEasy will mean 30 randomly selected squares will be filled in when you start. When you check your answer, the puzzle will take away all the squares that are wrongly filled.\nMedium will randomly fill in 25 squares. When you check you answers, we will tell you how many you have incorrect but not which ones are incorrect.\nUp for a challenge? Hard will randomly fill in 20 squares and you will only be able to know if the puzzle is correct or not.\nIf you want to change your difficulty, you may do so once you begin by clicking 'n' and 'E', 'M', or 'H'.\n Make sure your terminal size is at least 109 x 36. (This is an estimate because we coded this on a Mac). When you are ready to begin, select enter and your time will start!\nGood luck!");
 
 		Sudoku newBoard = new Sudoku("easy");
-		if(args[0].equals("easy")) {
+		if(args[0].equals("easy")) { //creates the board based off of the level inputted
 			 newBoard = new Sudoku("easy");
 		} else {
 			if(args[0].equals("medium")){
@@ -57,7 +57,7 @@ public class SudokuGame{
 
 		if (args.length == 2) {
 			if(args[0].equals("easy")) {
-				 newBoard = new Sudoku("easy", Integer.parseInt(args[1]));
+				 newBoard = new Sudoku("easy", Integer.parseInt(args[1])); //creating the board based off of the level and the choice in puzzle
 			} else {
 				if(args[0].equals("medium")){
 					 newBoard = new Sudoku("medium", Integer.parseInt(args[1]));
@@ -69,7 +69,7 @@ public class SudokuGame{
 
 		if (args.length == 3) {
 			if(args[0].equals("easy")) {
-				 newBoard = new Sudoku("easy", Integer.parseInt(args[1]), Integer.parseInt(args[2]));
+				 newBoard = new Sudoku("easy", Integer.parseInt(args[1]), Integer.parseInt(args[2])); //creating the board based off of the level and the choice in puzzle and the seed
 			} else {
 				if(args[0].equals("medium")){
 					 newBoard = new Sudoku("medium", Integer.parseInt(args[1]), Integer.parseInt(args[2]));
@@ -88,10 +88,10 @@ long lastSecond = 0;
 			Key key = terminal.readInput();
 			if (key!= null && key.getKind() == Key.Kind.Enter) {
 				start = true;
-				terminal.clearScreen();
+				terminal.clearScreen(); //gets rid of the homescreen
 					terminal.applySGR(Terminal.SGR.ENTER_BOLD); //have the board printed to be bolded
 					putString(1, 5, terminal, newBoard.toString()); //printing the board into the terminal
-					tStart = System.currentTimeMillis();
+					tStart = System.currentTimeMillis(); //starts the timer
 				}
 
 				while (start) {
@@ -125,7 +125,7 @@ long lastSecond = 0;
 				if (y == 10 || y == 14 || y >= 18 || y < 7 || x == 7 || x == 15 || x >= 23 || x < 0) {
 					putString(25, 7, terminal, "                                                          ");
 				} else {
-					putString(25, 7, terminal, "This is part of the original puzzle. You cannot change it.");
+					putString(25, 7, terminal, "This is part of the original puzzle. You cannot change it."); //if cursor lands on a position that is a part of the original puzzle, then the user cant change it and a message pops up
 				}
 			}
 
@@ -210,7 +210,7 @@ long lastSecond = 0;
 					}
 					putString(25, 9, terminal, "                                             ");
 				} else {
-					putString(25, 9, terminal, "You cannot move past this point on the board.");
+					putString(25, 9, terminal, "You cannot move past this point on the board."); //if the cursor is at the edge of the board then a message pops up
 				}
 				}
 				//space moves it diagonally
@@ -257,7 +257,7 @@ long lastSecond = 0;
 					putString(25, 10, terminal, "Are you sure you want to reset the board? Select shift + 2 if yes.     ");
 				}
 
-				if (key.getCharacter() == '@') {
+				if (key.getCharacter() == '@') { //used this character because we don't want the user to accidentally reset the board
 					terminal.clearScreen();
 					newBoard.reset();
 					terminal.applySGR(Terminal.SGR.ENTER_BOLD);
@@ -272,7 +272,7 @@ long lastSecond = 0;
 				}
 
 				if (key.getCharacter() == 'g') { //user can replace current board with the board last saved
-					putString(25, 10, terminal, "Do you want to retrieve your last saved board? Select shift + 4 if yes.");
+					putString(25, 10, terminal, "Do you want to retrieve your last saved board? Select shift + 4 if yes."); //makes sure the user wants to replace the current board with the board they last saved
 				}
 
 				if (key.getCharacter() == '$') {
@@ -302,7 +302,7 @@ long lastSecond = 0;
 									yy++;
 								}
 								terminal.moveCursor(xx, yy);
-								terminal.applySGR(Terminal.SGR.ENTER_BOLD);
+								terminal.applySGR(Terminal.SGR.ENTER_BOLD); //setting the added word from the hint in bold so the user knows it is part of the puzzle that they didn't add
 								terminal.putCharacter(newBoard.getOriginal(xnum, ynum));
 								newBoard.setPuzzle(xnum,ynum, newBoard.getOriginal(xnum,ynum));
 								terminal.applySGR(Terminal.SGR.EXIT_BOLD);
@@ -317,12 +317,12 @@ long lastSecond = 0;
 						putString (1, 5, terminal, "CONGRATULATIONS! YOU ARE FINISHED!                       ");
 					} else {
 						putString (1, 5, terminal, "Incorrect:( Try again.             ");
-						if (newBoard.getDifficulty().equals("easy")) {
+						if (newBoard.getDifficulty().equals("easy")) { //if the user is using the easy level, then gets rid of the wrong answers and replace it with a '_' and displays an incorrect message
 							terminal.applySGR(Terminal.SGR.ENTER_BOLD);
 							putString(1, 5, terminal, newBoard.toString());
 							terminal.applySGR(Terminal.SGR.EXIT_BOLD);
 						}
-						if (newBoard.getDifficulty().equals("medium")) {
+						if (newBoard.getDifficulty().equals("medium")) { //if the user is playing the medium level, then when te user checks, it will count the number of incorrect places in the board that is wrong
 							int count = 0;
 							for (int xnum = 0; xnum < 9; xnum++) {
 								for (int ynum = 0; ynum < 9; ynum ++) {
@@ -333,11 +333,11 @@ long lastSecond = 0;
 							}
 							putString(23, 5, terminal, " You have " + count + " squares incorrect.");
 						}
-					}
+					}// if the player is in the hard level, then it will only display if the board is correct or incorrect
 				}
 
 				if (key.getCharacter() == 'n') { //moving to the next position to the right and up one
-					putString(25, 10, terminal, "Do you want to get a new board? If yes, select 'E', 'M', or 'H'");
+					putString(25, 10, terminal, "Do you want to get a new board? If yes, select 'E', 'M', or 'H'"); //allows the user to choose between the three levels when pulling up a new board
 				}
 
 				if (key.getCharacter() == 'E') { //moving to the next position to the right and up one
@@ -362,7 +362,7 @@ long lastSecond = 0;
 				}
 
 				if (key.getCharacter() == 'q') {
-					putString(25, 10, terminal, "Are you sure you want the answer? If yes, select 'Q'");
+					putString(25, 10, terminal, "Are you sure you want the answer? If yes, select 'Q'"); //displays the answer key
 				}
 
 				if (key.getCharacter() == 'Q') {
@@ -401,9 +401,9 @@ long lastSecond = 0;
 				running = false;
 				terminal.exitPrivateMode();
 				if (newBoard.check()) {
-					System.out.println("CONGRATULATIONS! You finished with a time of " + lastSecond + " seconds!");
+					System.out.println("CONGRATULATIONS! You finished with a time of " + lastSecond + " seconds!"); //if check is correct and the user exits, then displays how long it took to complete it
 				} else {
-					System.out.println("Wow you spent " + lastSecond + " seconds and you still failed.");
+					System.out.println("Wow you spent " + lastSecond + " seconds and you still failed."); //if check is incorrect and the user exits, then this message pops up
 				}
 			}
 			}

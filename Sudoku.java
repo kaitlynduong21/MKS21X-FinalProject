@@ -22,13 +22,13 @@ public class Sudoku{
   public Sudoku(String level){
     Random randSeed = new Random ();
     seed = Math.abs((randSeed.nextInt() % 10000));
-    randgen = new Random(seed);
+    randgen = new Random(seed); // generates a random seed
     nums = new int[9][9];
     try{
-    File file = new File("Puzzles.txt");
+    File file = new File("Puzzles.txt"); //looks into text file of puzzles to choose one
     Scanner in = new Scanner(file);
-    puzzleChoice = Math.abs(randgen.nextInt() % 5);
-    for (int k = 0; k < puzzleChoice * 10 + 1; k++) {
+    puzzleChoice = Math.abs(randgen.nextInt() % 5); //randomly chooses one of the 5 puzzles printed
+    for (int k = 0; k < puzzleChoice * 10 + 1; k++) { //scans the integers from specific lines in the file
       in.nextLine();
     }
     for (int x = 0; x < 9; x ++ ) {
@@ -37,7 +37,7 @@ public class Sudoku{
     }
   }
   } catch (FileNotFoundException e) {
-  System.out.println("File not found");
+  System.out.println("File not found"); // if there is no text file, print an error
   System.exit(1);
 }
     difficulty = level;
@@ -52,17 +52,17 @@ public class Sudoku{
     original = new char[9][9];
     int count = 0;
     if(difficulty == "easy"){
-      count = 30; //finding random positions to place the numbers on the board
+      count = 30; //easy only fills in 30 spots in the board
     }
     if(difficulty == "medium"){
-      count = 25;
+      count = 25; //med fills in 25
     }
     if(difficulty == "hard"){
-      count = 20;
+      count = 20; //hard fills in 20
     }
     for (int x = 0; x < 9; x ++ ) {
       for (int y = 0; y < 9; y ++) {
-        puzzle[x][y] = (char)95;
+        puzzle[x][y] = (char)95; //fills in '_' character in the positions on the board
       }
     }
     while (count > 0) {
@@ -71,7 +71,7 @@ public class Sudoku{
         xcor = Math.abs(randgen.nextInt() % 9);
         ycor = Math.abs(randgen.nextInt() % 9);
         if (puzzle[xcor][ycor] == '_') {
-          puzzle[xcor][ycor] = (char)(nums[xcor][ycor] + 48);
+          puzzle[xcor][ycor] = (char)(nums[xcor][ycor] + 48); //finds random positions in the board to fill in the numbers from the answer key
           count--;
         }
       }
@@ -80,8 +80,8 @@ public class Sudoku{
     original = new char[9][9];
     for (int x = 0; x < 9; x ++ ) {
       for (int y = 0; y < 9; y ++) {
-        savedBoard[x][y] = puzzle[x][y];
-        original[x][y] = puzzle[x][y];
+        savedBoard[x][y] = puzzle[x][y]; //current saved board
+        original[x][y] = puzzle[x][y]; //copies over to original array just in case user wants to reset the board
       }
     }
   }
@@ -94,12 +94,12 @@ public class Sudoku{
     try{
     File file = new File("Puzzles.txt");
     Scanner in = new Scanner(file);
-    for (int k = 0; k < choice * 10 + 1; k++) {
+    for (int k = 0; k < choice * 10 + 1; k++) { //instead of randomly choosing a puzzle, user can input the specific board to use
       in.nextLine();
     }
     for (int x = 0; x < 9; x ++ ) {
       for (int y = 0; y < 9; y ++) {
-        nums[x][y] = in.nextInt(); //copying over char values to answer
+        nums[x][y] = in.nextInt();
     }
   }
   } catch (FileNotFoundException e) {
@@ -116,7 +116,7 @@ public class Sudoku{
     puzzle = new char[9][9];
     int count = 0;
     if(difficulty == "easy"){
-      count = 30; //finding random positions to place the numbers on the board
+      count = 30;
     }
     if(difficulty == "medium"){
       count = 25;
@@ -151,7 +151,7 @@ public class Sudoku{
 
   public Sudoku(String level, int choice, int seed1){
     randgen = new Random(seed1);
-    seed = seed1;
+    seed = seed1; //instead of using a randomly generated seed, user can input a seed
     nums = new int[9][9];
     puzzleChoice = choice;
     try{
@@ -162,7 +162,7 @@ public class Sudoku{
     }
     for (int x = 0; x < 9; x ++ ) {
       for (int y = 0; y < 9; y ++) {
-        nums[x][y] = in.nextInt(); //copying over char values to answer
+        nums[x][y] = in.nextInt();
     }
   }
   } catch (FileNotFoundException e) {
@@ -179,7 +179,7 @@ public class Sudoku{
     puzzle = new char[9][9];
     int count = 0;
     if(difficulty == "easy"){
-      count = 30; //finding random positions to place the numbers on the board
+      count = 30;
     }
     if(difficulty == "medium"){
       count = 25;
@@ -213,7 +213,7 @@ public class Sudoku{
   }
 
   public int getPuzzleChoice() {
-    return puzzleChoice;
+    return puzzleChoice; //return the puzzle choice
   }
 
   public String toString(){ //prints the board currently working on
@@ -254,7 +254,7 @@ public class Sudoku{
     return newstr;
   }
 
-  public String originalBoard(){ //displays the last saved board
+  public String originalBoard(){ //displays the board the user originally had
     String newstr = "\nOriginal board: \n";
     for (int x = 0; x < 9; x ++ ) {
       for (int y = 0; y < 9; y ++) {
@@ -292,19 +292,19 @@ public class Sudoku{
     return newstr;
   }
 
-  public int getSeed(){
+  public int getSeed(){ //returns the seed
     return seed;
   }
 
-  public char getOriginal(int x, int y){
+  public char getOriginal(int x, int y){ //if user wants to restart their progress, this returns the original board
     return original[y][x];
   }
 
-  public char[][] getOriginalPuzzle(){
+  public char[][] getOriginalPuzzle(){//if user wants to restart their progress, this returns the original board
     return original;
   }
 
-  public void reset() {
+  public void reset() { //replacing the numbers entered into the puzzle with values from original board
     for (int x = 0; x < 9; x ++ ) {
       for (int y = 0; y < 9; y ++) {
         puzzle[x][y] = original[x][y];
@@ -312,15 +312,15 @@ public class Sudoku{
     }
   }
 
-  public char getPuzzle(int x, int y){
+  public char getPuzzle(int x, int y){ //return the puzzle
     return puzzle[y][x];
   }
 
-  public char getAnswer(int x, int y){
+  public char getAnswer(int x, int y){ //return the answer key
     return answer[y][x];
   }
 
-  public String getDifficulty(){
+  public String getDifficulty(){//return the difficulty level
     return difficulty;
   }
 
@@ -352,7 +352,7 @@ public class Sudoku{
     }
   }
 
-  public boolean check() {
+  public boolean check() { //allows the user to check if their sudoku board is the same with the answer key by comparing every value
     boolean a = true;
     for (int x = 0; x < 9; x++) {
       for (int y = 0; y < 9; y ++) {
