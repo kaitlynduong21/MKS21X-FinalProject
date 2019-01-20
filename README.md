@@ -1,11 +1,11 @@
 # Instructions
 
-How to play: 
+How to play:
 The goal of the game is to fill out the entire 9 by 9 puzzle in which each row, each column, and each 3 by 3 section, only contains the numbers 1 through 9 once. If you complete the board and your solution matches our solution, you win!
 
-How to navigate: 
+How to navigate:
 
-1. Change the terminal size to full screen. 
+1. Change the terminal size to full screen.
 2. Compile the SudokuGame.java file (javac -cp lanterna.jar:. SudokuGame.java)
 3. Run the SudokuGame.java file (java -cp lanterna.jar:. SudokuGame). You will be prompted to add one, two, or three arguments. The first argument has to be either "easy", "medium", or "hard", depending on what difficulty you want. The other two arguments are optional. You can add a second argument which is the choice of puzzle (the complete lists of puzzles is in the puzzles.txt file). You can add a third argument which is the seed of the puzzle, so you can recreate the same puzzle later.
 4. When you enter the game, you start at the first upper left square. You can use the arrow buttons to navigate around the board. On the side of the board will be options that you can choose while playing; if you want to win quickly, we suggest clicking hint until the board is filled up.
@@ -17,11 +17,11 @@ How to navigate:
 
 1/04: Sabrina created the Sudoku class. She has completed the basis of our toString method, but we will try to improve it to resemble a sudoku board more. Kaitlyn worked on the Square class and has created a new field to make it easier to know whether or not a square shows its number.
 
-1/05: We decided that it is better to use char[][] rather than use the Square class, so we have scraped the idea of Squares. Kaitlyn completed toStrings, getKey, and myBoard methods. She has also created a second constructor that will take in a seed, so that you can recreate the board you want. Sabrina included lanterna methods into the Sudoku.java and tried to incoporate it in the code.
+1/05: We decided that it is better to use char[][] rather than use the Square class, so we have scraped the idea of Squares. Kaitlyn completed toStrings, getKey, and myBoard methods. She has also created a second constructor that will take in a seed, so that you can recreate the board you want. Sabrina included lanterna methods into the Sudoku.java and tried to incorporate it in the code.
 
-1/06: Kaitlyn used the Sudoku board as the background in the TerminalDemo.java and was able to move the cursor to enter in numbers in the Sudoku grid. Sabrina added a save method to add the saved board   int rand;into a text file.
+1/06: Kaitlyn used the Sudoku board as the background in the TerminalDemo.java and was able to move the cursor to enter in numbers in the Sudoku grid. Sabrina added a save method to add the saved board into a text file.
 
-1/07: We are working on the save method in the main function. Currently if you select the character 's', the original puzzle will be saved in a text file, however we are trying to figure out how we can save the changes made to the puzzle. We have been able to clear the board by selecting the character 'c', but we want to add a step after you select c asking if you are sure you want to restart because we don't want someone accidently selecting c having all their progress deleted.
+1/07: We are working on the save method in the main function. Currently if you select the character 's', the original puzzle will be saved in a text file, however we are trying to figure out how we can save the changes made to the puzzle. We have been able to clear the board by selecting the character 'c', but we want to add a step after you select c asking if you are sure you want to restart because we don't want someone accidentally selecting c having all their progress deleted.
 
 1/08: Kaitlyn worked on adding a clear, save, and retrieve saved board feature in the TerminalDemo file. The save method does not work completely yet because it is not saving to the correct locations so when you retrieve the saved board, the board is not what was saved. Sabrina is starting to work on the hint method.
 
