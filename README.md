@@ -5,7 +5,7 @@ The goal of the game is to fill out the entire 9 by 9 puzzle in which each row, 
 
 How to navigate:
 
-1. Change the terminal size to full screen.
+1. Resize the terminal size to least 109 x 36. (This is an estimate because we coded this on a Mac). If when run there seems to be messed up visuals, enlarge the terminal screen.
 2. Compile the SudokuGame.java file (javac -cp lanterna.jar:. SudokuGame.java)
 3. Run the SudokuGame.java file (java -cp lanterna.jar:. SudokuGame). You will be prompted to add one, two, or three arguments. The first argument has to be either "easy", "medium", or "hard", depending on what difficulty you want. The other two arguments are optional. You can add a second argument which is the choice of puzzle (the complete lists of puzzles is in the puzzles.txt file). You can add a third argument which is the seed of the puzzle, so you can recreate the same puzzle later.
 4. When you enter the game, you start at the first upper left square. You can use the arrow buttons to navigate around the board. On the side of the board will be options that you can choose while playing; if you want to win quickly, we suggest clicking hint until the board is filled up.
@@ -47,4 +47,6 @@ How to navigate:
 
 1/19: Kaitlyn altered the main function so that it can take in puzzle choice and seeds.
 
-1/20:1/19: Kaitlyn added a home screen that displays the rules and information about the difficulties. She also altered the check function to adjust it for different difficulties.
+1/20: Kaitlyn added a home screen that displays the rules and information about the difficulties. She also altered the check function to adjust it for different difficulties. Sabrina added comments to the code.
+
+1/21: Kaitlyn added more puzzles.

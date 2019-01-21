@@ -80,6 +80,7 @@ public class SudokuGame{
 				}
 			}
 
+
 		int x = 1;
 		int y = 7;
 
