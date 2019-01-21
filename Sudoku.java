@@ -27,7 +27,7 @@ public class Sudoku{
     try{
     File file = new File("Puzzles.txt"); //looks into text file of puzzles to choose one
     Scanner in = new Scanner(file);
-    puzzleChoice = Math.abs(randgen.nextInt() % 5); //randomly chooses one of the 5 puzzles printed
+    puzzleChoice = Math.abs(randgen.nextInt() % 9); //randomly chooses one of the 10 puzzles printed
     for (int k = 0; k < puzzleChoice * 10 + 1; k++) { //scans the integers from specific lines in the file
       in.nextLine();
     }
