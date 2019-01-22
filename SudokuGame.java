@@ -90,7 +90,8 @@ public class SudokuGame{
 		TerminalSize size = terminal.getTerminalSize();
 		terminal.setCursorVisible(false);
 		boolean running = true;
-		putString(0, 0, terminal, "Welcome to Kaitlyn and Sabrina's game of Sudoku!\nThe rules are simple: fill in each square with a number from 1-9.\nA completed and correct Sudoku puzzle will contain the integers 1-9 in each row, each column, and each 3 by 3 section, exactly once.\nAre you ready for a challenge? You have selected " + args[0] + "as your difficulty.\nEasy will mean 30 randomly selected squares will be filled in when you start. When you check your answer, the puzzle will take away all the squares that are wrongly filled.\nMedium will randomly fill in 25 squares. When you check you answers, we will tell you how many you have incorrect but not which ones are incorrect.\nUp for a challenge? Hard will randomly fill in 20 squares and you will only be able to know if the puzzle is correct or not.\nIf you want to change your difficulty, you may do so once you begin by clicking 'n' and 'E', 'M', or 'H'.\nWhen you are ready to begin, select enter and your time will start!\nGood luck!");
+		//boolean mode = true;
+		putString(0, 0, terminal, "Welcome to Kaitlyn and Sabrina's game of Sudoku!\nThe rules are simple: fill in each square with a number from 1-9.\nA completed and correct Sudoku puzzle will contain the integers 1-9 in each row, each column, and each 3 by 3 section, exactly once.\nIf a number is bold, that means you cannot change it because it is apart of the original puzzle.\nThe characters you put in will appear in blue.\nUse the arrow keys to navigate the puzzle. You start at the upper left square.\nIf you forget where you are, your current position is displayed on the side of your board, 0, 0 being the first square.\nAre you ready? You have selected " + args[0] + " as your difficulty.\nEasy will mean 30 randomly selected squares will be filled in when you start. When you check your answer, the puzzle will take away all the squares that are wrongly filled.\nMedium will randomly fill in 25 squares. When you check you answers, we will tell you how many you have incorrect but not which ones are incorrect.\nUp for a challenge? Hard will randomly fill in 20 squares and you will only be able to know if the puzzle is correct or not.\nIf you want to change your difficulty, you may do so once you begin by clicking 'n' and 'E', 'M', or 'H'.\nWhen you are ready to begin, select enter and your time will start!\nGood luck!");
 
 long tStart = 0;
 long lastSecond = 0;
@@ -98,6 +99,7 @@ long lastSecond = 0;
 
 		while(running){
 			boolean start = false;
+			boolean mode = true;
 			Key key = terminal.readInput();
 			if (key!= null && key.getKind() == Key.Kind.Enter) {
 				start = true;
@@ -115,6 +117,7 @@ long lastSecond = 0;
 			terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
 			terminal.applyForegroundColor(Terminal.Color.DEFAULT);
 			terminal.applySGR(Terminal.SGR.RESET_ALL);
+
 
 			double k = 0.5 * x - 0.5; //setting x and y coordinates
 			if (k > 3) {
@@ -247,6 +250,7 @@ long lastSecond = 0;
 						key.getCharacter() == '9' ) {
 
 							terminal.moveCursor(x,y);
+							terminal.applyForegroundColor(Terminal.Color.BLUE);
 							terminal.putCharacter(key.getCharacter()); //add the number into the position of the cursor
 							newBoard.setPuzzle(xcor, ycor, key.getCharacter()); //add the number added to the puzzle array
 						}
@@ -382,6 +386,14 @@ long lastSecond = 0;
 					putString(1, 20, terminal, newBoard.getKey());
 				}
 
+				if (key.getCharacter() == 'p') {
+					mode = false;
+				}
+
+				if (key.getCharacter() == 'P') {
+					mode = true;
+				}
+
 				putString(1,4,terminal,"["+key.getCharacter() +"]");
 				putString(1,1,terminal,key+"        ");//to clear leftover letters pad withspaces
 
@@ -390,15 +402,24 @@ long lastSecond = 0;
 				}
 			}
 
+
 			//DO EVEN WHEN NO KEY PRESSED:
+
+			if (mode) {
+
 			long tEnd = System.currentTimeMillis();
 			long millis = tEnd - tStart;
 			putString(1,2,terminal,"Milliseconds since start of program: "+millis); //times the user how long it takes to execute the sudoku board
 			if(millis/1000 > lastSecond){
 				lastSecond = millis / 1000;
 				//one second has passed.
-				putString(1,3,terminal,"Seconds since start of program: "+lastSecond);
+				putString(1,3,terminal,"Seconds since start of program: "+lastSecond +"                                              ");
 			}
+		} else {
+			terminal.applySGR(Terminal.SGR.ENTER_BOLD,Terminal.SGR.ENTER_BLINK);
+			putString(1,3,terminal, "You are on a pause! When you are ready to start again, select 'P'.");
+			terminal.applySGR(Terminal.SGR.RESET_ALL);
+		}
 
 			putString(25, 11, terminal, "Save: s ");
 			putString(25, 12, terminal, "Reset: r");
@@ -408,6 +429,7 @@ long lastSecond = 0;
 			putString(25, 16, terminal, "Get New Board: n");
 			putString(25, 17, terminal, "Want answer?: q");
 			putString(25, 18, terminal, "Give up?: esc");
+			putString(25, 19, terminal, "Need a break?: p");
 
 			if (key != null && key.getKind() == Key.Kind.Escape) {
 				start = false;

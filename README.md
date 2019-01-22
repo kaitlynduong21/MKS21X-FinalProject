@@ -49,4 +49,4 @@ How to navigate:
 
 1/20: Kaitlyn added a home screen that displays the rules and information about the difficulties. She also altered the check function to adjust it for different difficulties. Sabrina added comments to the code.
 
-1/21: Kaitlyn added more puzzles.
+1/21: Kaitlyn added more puzzles. We have been trying to get the current position you are in have the character change color so it is easy to identify where the user is, but we have been unable to do so. Instead, it makes the number that you insert blue.
