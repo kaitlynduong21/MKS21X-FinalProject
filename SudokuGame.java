@@ -157,8 +157,16 @@ long lastSecond = 0;
 
 			key = terminal.readInput();
 
+			if (key != null && key.getCharacter() == 'p') {
+				mode = false;
+			}
 
-			if (key != null)
+			if (key != null && key.getCharacter() == 'P') {
+				mode = true;
+			}
+
+
+			if (key != null && mode)
 			{
 
 				if (key.getKind() == Key.Kind.ArrowLeft) { //cursor moving to the left
@@ -384,14 +392,6 @@ long lastSecond = 0;
 
 				if (key.getCharacter() == 'Q') {
 					putString(1, 20, terminal, newBoard.getKey());
-				}
-
-				if (key.getCharacter() == 'p') {
-					mode = false;
-				}
-
-				if (key.getCharacter() == 'P') {
-					mode = true;
 				}
 
 				putString(1,4,terminal,"["+key.getCharacter() +"]");
